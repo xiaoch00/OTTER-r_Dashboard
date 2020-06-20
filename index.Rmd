@@ -1,0 +1,21 @@
+---
+title: "rSEAL Dashboard"
+author: "Allison Kunerth"
+date: "6/20/2020"
+output: 
+  html_document:
+    theme: flatly
+    toc: TRUE
+    toc_float: TRUE
+---
+
+```{r setup, include = FALSE, cache = FALSE}
+knitr::opts_chunk$set(
+  comment = NA,
+  warning = FALSE,
+  message = FALSE)
+```
+
+## Homepage
+
+This is the homepage for the rSEAL project.
