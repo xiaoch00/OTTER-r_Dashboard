@@ -54,8 +54,6 @@ navbar:
         href: tbd.html
       - text: "Follow-Up"
         href: tbd.html     
-      - text: "Test34"
-        href: tbd.html  
   right:
     - icon: fa-github
       href: https://github.com/akunerth/rSEAL.git
