@@ -13,14 +13,15 @@ output:
 #testplot
 testdata <- read.csv(file = 'Test_Data.csv')
 library(ggplot2)
-p <- ggplot(data = testdata, aes(x=SEAL.C1.DERI.002)) + geom_bar(show.legend=TRUE, fill=c("light blue","light pink"), colour="black")
+KGender <- ggplot(data = testdata, aes(x=SEAL.C1.DERI.002)) + geom_bar(show.legend=TRUE, fill=c("light blue","light pink"), colour="black")+ labs(caption = "SEAL Test Data", x = "Child Gender", y = "Total Children")
+CGRace <- ggplot(data = testdata, aes(x=SEAL.C1.DERI.003)) + geom_bar(show.legend=TRUE, fill=c("pink","light blue","light green", "light yellow"), colour="black")+ labs(caption = "SEAL Test Data", x = "Caregiver Race", y = "Counts")
 ```
 
-## Gender Distribution (Test)
 
-Test data of child gender using SEAL data to date.
+Test demographic data using SEAL data to date.
 
 ```{r pressure, echo=FALSE}
-plot(p)
+plot(KGender)
+plot(CGRace)
 ```
 
