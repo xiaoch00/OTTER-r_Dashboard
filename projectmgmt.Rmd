@@ -1,7 +1,7 @@
 ---
 title: "Project Management"
-author: "Allison Kunerth"
-date: "6/20/2020"
+author: 
+date: "Last Updated: 6/20/2020"
 output: 
   html_document:
     theme: flatly
