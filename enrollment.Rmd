@@ -9,7 +9,7 @@ output:
     toc_float: TRUE
 ---
 
-```{r setup, include = FALSE, cache = FALSE}
+```{r setup, include = FALSE, echo= FALSE,cache = FALSE}
 knitr::opts_chunk$set(
   comment = NA,
   warning = FALSE,
@@ -20,9 +20,6 @@ knitr::opts_chunk$set(
 
 Enrollment numbers for FIND
 
-```{r cars}
-summary(cars)
-```
 
 ## HTP Enrollment
 

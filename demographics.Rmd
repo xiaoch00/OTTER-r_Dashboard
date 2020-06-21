@@ -9,24 +9,18 @@ output:
     toc_float: TRUE
 ---
 
-```{r ggplot, fig.width=4, fig.height=3, message=FALSE}
+```{r ggplot, fig.width=4, fig.height=3, echo = FALSE, message=FALSE}
 #testplot
 testdata <- read.csv(file = 'Test_Data.csv')
 library(ggplot2)
-childgender <-testdata$SEAL.C1.DERI.002
-barplot(childgender)
+p <- ggplot(data = testdata, aes(x=SEAL.C1.DERI.002)) + geom_bar(show.legend=TRUE, fill=c("light blue","light pink"), colour="black")
 ```
 
-## Overall Demographics
+## Gender Distribution (Test)
 
-This section is for overall demographics
-
-
-## By Condition
-
-Demographics compared with the two conditions
+Test data of child gender using SEAL data to date.
 
 ```{r pressure, echo=FALSE}
-plot(childgender)
+plot(p)
 ```
 
