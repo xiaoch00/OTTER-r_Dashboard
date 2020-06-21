@@ -9,26 +9,24 @@ output:
     toc_float: TRUE
 ---
 
-```{r setup, include = FALSE, cache = FALSE}
-knitr::opts_chunk$set(
-  comment = NA,
-  warning = FALSE,
-  message = FALSE)
+```{r ggplot, fig.width=4, fig.height=3, message=FALSE}
+#testplot
+testdata <- read.csv(file = 'Test_Data.csv')
+library(ggplot2)
+childgender <-testdata$SEAL.C1.DERI.002
+barplot(childgender)
 ```
 
 ## Overall Demographics
 
 This section is for overall demographics
 
-```{r cars}
-summary(cars)
-```
 
 ## By Condition
 
 Demographics compared with the two conditions
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
+plot(childgender)
 ```
 
