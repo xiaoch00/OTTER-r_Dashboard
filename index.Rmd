@@ -15,7 +15,12 @@ knitr::opts_chunk$set(
   message = FALSE)
 ```
 
+```{r, fig.retina=NULL, out.width=100, echo=FALSE}
+knitr::include_graphics("seallogo.jpg")
+```
+
 
 ## Homepage
 
 This is the homepage for the rSEAL project.
+
