@@ -31,5 +31,6 @@ Test of demographic data using SEAL data to date.
 ```{r pressure, echo=FALSE}
 plot(KGender)
 plot(CGRace)
+
 ```
 
