@@ -57,3 +57,5 @@ navbar:
   right:
     - icon: fa-github
       href: https://github.com/akunerth/rSEAL_Dashboard.git
+    - icon: fa-flask
+      href: https://ctn.uoregon.edu/projects/supporting-early-learning-seal

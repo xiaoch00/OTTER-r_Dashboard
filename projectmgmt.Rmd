@@ -1,7 +1,7 @@
 ---
 title: "Project Management"
 author: 
-date: "Last Updated: 6/20/2020"
+date: "Last Updated: 6/21/2020"
 output: 
   html_document:
     theme: flatly
@@ -9,17 +9,26 @@ output:
     toc_float: TRUE
 ---
 
-```{r setup, include = FALSE, cache = FALSE}
+```{r setup, include = FALSE, echo = FALSE, cache = FALSE}
 knitr::opts_chunk$set(
   comment = NA,
   warning = FALSE,
   message = FALSE)
 ```
 
-## Payments 
 
-This is the rollup of payments to date
+This section will have the following:
 
-```{r cars}
-summary(cars)
-```
+  - Payments made to date (Chart with total by phase)
+  
+  - Recruitment numbers by source 
+  
+      - Source --> Number contacted / Number eligible / Number Participating / Number drop out
+  
+  
+  
+  - Recruitment success rates by source (chart)
+  
+  
+  - Consort Diagram
+

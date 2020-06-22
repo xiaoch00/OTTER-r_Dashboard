@@ -1,7 +1,7 @@
 ---
 title: "Demographics"
 author: 
-date: "Last Updated: 6/20/2020"
+date: "Last Updated: 6/21/2020"
 output: 
   html_document:
     theme: flatly
@@ -18,7 +18,15 @@ CGRace <- ggplot(data = testdata, aes(x=SEAL.C1.DERI.003)) + geom_bar(show.legen
 ```
 
 
-Test demographic data using SEAL data to date.
+Test of demographic data using SEAL data to date.
+
+  - Working on getting a legend and labels added to charts
+  
+  - Once charts are good, intend to put basic demographics:
+  
+      - Gender, Race, Age, Education, Income Level
+  
+  - Need to call file with source(here), store data outside source folder, and switch from wide to long based on time variable (?), aggregate or gather commands may work...
 
 ```{r pressure, echo=FALSE}
 plot(KGender)

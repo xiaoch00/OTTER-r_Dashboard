@@ -8,13 +8,13 @@ output:
     toc: TRUE
     toc_float: TRUE
 ---
-
 ```{r setup, include = FALSE, cache = FALSE}
 knitr::opts_chunk$set(
   comment = NA,
   warning = FALSE,
   message = FALSE)
 ```
+
 
 ## Homepage
 

@@ -16,15 +16,11 @@ knitr::opts_chunk$set(
   message = FALSE)
 ```
 
-## FIND Enrollment
+In this section there will be:
+  
+  - Number of subjects by condition (Find vs HTP)
+  
+  - Number of subjects across time (monthly trend)
+  
+  - Number of subjects at each phase in the study (Pre, Intervention, Post and Follow-Up)
 
-Enrollment numbers for FIND
-
-
-## HTP Enrollment
-
-Enrollment numbers for HTP
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
