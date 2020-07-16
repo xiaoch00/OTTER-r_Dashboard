@@ -48,16 +48,16 @@ AttemptsStatus <- DKParsedData %>%
 
 ```
 
-```{r Attempt Status, fig.width=4, fig.height=3, echo = FALSE, message=FALSE}
+```{r Attempt Status, fig.width=5, fig.height=5, echo = FALSE, message=FALSE}
 
-#Attempt Status
+#Attempt Statuses
 
 Attempt1 <- table(DKParsedData$rseal_dklog_025)
 Attempt1Plot <- barplot(Attempt1, beside = TRUE, main = "Attempt 1 Statuses",
         col = brewer.pal(5,"Set2"), 
         xlab = " ",
         ylab = "Count", legend = c("Contact family","Requested Call Back", "Non-responsive/Disconnected", "Scheduled", "Ineligible"),
-        args.legend = list(x="topright", cex=.7),ylim=c(0,50), xaxt = "n")
+        args.legend = list(x="topright", cex=.7),ylim=c(0,20), xaxt = "n")
 barlabels(Attempt1Plot, Attempt1)
 
 Attempt2 <- table(DKParsedData$rseal_dklog_028)
@@ -77,4 +77,8 @@ Attempt3Plot <- barplot(Attempt3, beside = TRUE, main = "Attempt 3 Statuses",
         ylab = "Count", legend = c("Scheduled"),
          args.legend = list(x="topright", cex=.7),ylim=c(0,10), xaxt = "n")
 barlabels(Attempt3Plot, Attempt3)
-        
+```   
+
+
+
+
