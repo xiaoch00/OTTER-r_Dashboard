@@ -69,15 +69,15 @@ ToSched <- Interested - ScheduledCount
 
 NumInterested <-nrow(Interested)
 PercentInterested <- 100*sum(Interested, na.rm=T)/nrow(Contacted)
+
+SchedSuccess <-100*sum(ScheduledCount)/(nrow(Contacted))
 ```
 
-<font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for their first visit in Wave 1.</font> 
+<font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for their first visit in Wave 1, with a <font size="4" color="red"> **`r papaja::printnum(SchedSuccess)`\%**</font> scheduling success rate (number scheduled out of total contacted).</font>
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(Interested)`**</font> participants who are interested, with <font size="4" color="red"> **`r papaja::printnum(ToSched)`**</font> who still need to be scheduled.</font> 
 
-<font size = "4"> Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(PercentInterested)`\%**</font> were interested.</font> 
-
-<font size = "4"> There are currently <font size="4" color="red"> **`r ToContact`**</font> participants who have yet to be contacted.</font> 
+<font size = "4"> Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(PercentInterested)`\%**</font> were interested, and there are currently <font size="4" color="red"> **`r ToContact`**</font> participants who have yet to be contacted.</font> 
 
 ```{r Attempt Status, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
