@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -238,6 +237,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -266,6 +266,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -472,8 +478,10 @@ div.tocify {
 </div>
 
 
-<p><font size = "6"> There are currently <font size="6" color="red"> 3</font> participants scheduled for their first visit in Wave 1.</font></p>
-<p><img src="recruitment_files/figure-html/Attempt%20Status-1.png" width="480" /><img src="recruitment_files/figure-html/Attempt%20Status-2.png" width="480" /><img src="recruitment_files/figure-html/Attempt%20Status-3.png" width="480" /></p>
+<p><font size = "4"> There are currently <font size="4" color="red"> 3</font> participants scheduled for their first visit in Wave 1.</font></p>
+<p><font size = "4"> There are currently <font size="4" color="red"> 63</font> participants who have yet to be contacted.</font></p>
+<p><font size = "4"> Of those who were contacted, <font size="4" color="red"> 91.67% </font>% were interested.</font></p>
+<p><img src="recruitment_files/figure-html/Attempt%20Status-1.png" width="384" /><img src="recruitment_files/figure-html/Attempt%20Status-2.png" width="384" /><img src="recruitment_files/figure-html/Attempt%20Status-3.png" width="384" /></p>
 
 
 
@@ -525,7 +533,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

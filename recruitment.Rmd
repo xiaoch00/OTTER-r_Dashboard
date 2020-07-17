@@ -8,24 +8,27 @@ output:
     toc: TRUE
     toc_float: TRUE
 ---
-```{r packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
+```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
 
 knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
 library(knitr)
-library(tidyr)
+options(digits=2)
+library(ggpubr)
+library(plotly)
+library(emmeans)
+library(papaja)
+library(ggpubr)
 library(kableExtra)
-library(stringr)
-library(dplyr)
 library(descr)
+library(dplyr)
 library(magick)
 library(tidyverse)
+library(ggformula)
 library(lubridate)
 library(janitor)
 library(plyr)
 library(tigerstats)
-library(readr)
-library(ggplot2)
 library(plotrix)
 library(RColorBrewer)
 options(knitr.table.format = "html", knitr.kable.NA = '') 
@@ -39,30 +42,39 @@ Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
 Atempt3Date <- as.Date(DKdata$rseal_dklog_032, format = "%m/%d/%Y")
 
-DKParsedData <- DKdata %>% select (rseal_dkid,rseal_dklog_006:rseal_dk_log_complete )
+DKParsedData <- select (DKdata, rseal_dkid,rseal_dklog_006:rseal_dk_log_complete )
 DKParsedData <- as_tibble(DKParsedData)
 
-AttemptsStatus <- DKParsedData %>% 
-  select(rseal_dkid, rseal_dklog_025: rseal_dklog_032)
-
 ```
 
 
-```{r echo = FALSE, include = FALSE, eval=TRUE}
+```{r recruitment, echo=FALSE, message=FALSE, warning=FALSE}
 
-Scheduled <-subset(AttemptsStatus,DKParsedData$rseal_dklog_025 == '4' | DKParsedData$rseal_dklog_028 == '4'| DKParsedData$rseal_dklog_031 == '4' )
+Scheduled <-subset(DKParsedData,DKParsedData$rseal_dklog_025 == '4' | DKParsedData$rseal_dklog_028 == '4'| DKParsedData$rseal_dklog_031 == '4' )
 
-ScheduledCount <- Scheduled%>%
-  count()
-ScheduledCount2 <- ScheduledCount
+ScheduledCount <- nrow(Scheduled)
 
+#Number in DK Log compared to how many contacted so far
+
+Contacted <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1' | DKParsedData$rseal_dklog_009 == '0')
+
+ToContact <- nrow(DKParsedData) - nrow(Contacted)
+
+#Relative success rate (Number interested)
+
+Interested <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1')
+
+NumInterested <-nrow(Interested)
+PercentInterested <- 100*sum(NumInterested, na.rm=T)/nrow(Contacted)
 ```
 
-<font size = "6"> There are currently <font size="6" color="red"> `r ScheduledCount2`</font> participants scheduled for their first visit in Wave 1.</font>
+<font size = "4"> There are currently <font size="4" color="red"> `r papaja::printnum(ScheduledCount)`</font> participants scheduled for their first visit in Wave 1.</font> 
 
+<font size = "4"> There are currently <font size="4" color="red"> `r ToContact`</font> participants who have yet to be contacted.</font> 
 
+<font size = "4"> Of those who were contacted, <font size="4" color="red"> `r papaja::printnum(PercentInterested)`\% </font>% were interested.</font> 
 
-```{r Attempt Status, fig.width=5, fig.height=5, echo = FALSE, message=FALSE}
+```{r Attempt Status, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
 #Attempt Statuses
 
