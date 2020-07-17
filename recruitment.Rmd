@@ -68,11 +68,11 @@ NumInterested <-nrow(Interested)
 PercentInterested <- 100*sum(NumInterested, na.rm=T)/nrow(Contacted)
 ```
 
-<font size = "4"> There are currently <font size="4" color="red"> `r papaja::printnum(ScheduledCount)`</font> participants scheduled for their first visit in Wave 1.</font> 
+<font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for their first visit in Wave 1.</font> 
 
-<font size = "4"> There are currently <font size="4" color="red"> `r ToContact`</font> participants who have yet to be contacted.</font> 
+<font size = "4"> There are currently <font size="4" color="red"> **`r ToContact`**</font> participants who have yet to be contacted.</font> 
 
-<font size = "4"> Of those who were contacted, <font size="4" color="red"> `r papaja::printnum(PercentInterested)`\% </font>% were interested.</font> 
+<font size = "4"> Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(PercentInterested)`\%**</font> were interested.</font> 
 
 ```{r Attempt Status, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
@@ -104,4 +104,31 @@ Attempt3Plot <- barplot(Attempt3, beside = TRUE, main = "Attempt 3 Statuses",
          args.legend = list(x="topright", cex=.7),ylim=c(0,10), xaxt = "n")
 barlabels(Attempt3Plot, Attempt3)
 ```   
+```{r Not Interested Setup, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
+#Not Interested Reasons
+
+NotInt <- subset(DKParsedData,
+                   DKParsedData$rseal_dklog_010___0 == '1' |
+                   DKParsedData$rseal_dklog_010___1 == '1'| 
+                   DKParsedData$rseal_dklog_010___2 == '1' |
+                   DKParsedData$rseal_dklog_010___3 == '1'| 
+                   DKParsedData$rseal_dklog_010___4 == '1' |
+                   DKParsedData$rseal_dklog_010___5 == '1' |
+                   DKParsedData$rseal_dklog_010___6 == '1' |
+                   DKParsedData$rseal_dklog_010___7 == '1' |
+                   DKParsedData$rseal_dklog_010___8 == '1'|
+                   DKParsedData$rseal_dklog_010___9 == '1')
+
+NotInt2 <- dplyr::select (NotInt, rseal_dklog_010___0,rseal_dklog_010___1,rseal_dklog_010___2,rseal_dklog_010___3,rseal_dklog_010___4,rseal_dklog_010___5,rseal_dklog_010___6,rseal_dklog_010___7,rseal_dklog_010___8,rseal_dklog_010___9 )
+
+NotInt3<- t(NotInt2)
+rownames(NotInt3) <- c("Unknown", "Time Commitment","Too Stressed","Don't need help / Not a good fit for family","Privacy Concerns","Out of my comfort zone","Cultural / Language Barriers","I do not understand the project","I do not know the staff","Other")
+```   
+
+<font size = "4"> **Counts and reasons given by those not interested in participating.**</font> 
+
+``` {r Not Interested Reasons, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
+kable(NotInt3) %>%
+  kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
+```  
