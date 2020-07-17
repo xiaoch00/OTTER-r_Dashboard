@@ -6,12 +6,14 @@ navbar:
       href: index.html
     - text: "Snapshot"
       menu:
-      - text: "Demographics"
-        href: demographics.html
       - text: "Recruitment"
         href: recruitment.html
+      - text: "Intervention"
+        href: intervention.html
       - text: "Current Enrollment"
         href: enrollment.html
+      - text: "Demographics"
+        href: demographics.html
       - text: "Project Management"
         href: projectmgmt.html
     - text: "Measures Summaries"
