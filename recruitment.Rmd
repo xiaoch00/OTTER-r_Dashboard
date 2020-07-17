@@ -58,14 +58,17 @@ ScheduledCount <- nrow(Scheduled)
 
 Contacted <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1' | DKParsedData$rseal_dklog_009 == '0')
 
-ToContact <- nrow(DKParsedData) - nrow(Contacted)
+ToContact <- sum(nrow(DKParsedData) - nrow(Contacted))
 
 #Relative success rate (Number interested)
 
 Interested <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1')
+Interested <- nrow(Interested)
+
+ToSched <- Interested - ScheduledCount
 
 NumInterested <-nrow(Interested)
-PercentInterested <- 100*sum(NumInterested, na.rm=T)/nrow(Contacted)
+PercentInterested <- 100*sum(Interested, na.rm=T)/nrow(Contacted)
 ```
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for their first visit in Wave 1.</font> 
@@ -73,6 +76,8 @@ PercentInterested <- 100*sum(NumInterested, na.rm=T)/nrow(Contacted)
 <font size = "4"> There are currently <font size="4" color="red"> **`r ToContact`**</font> participants who have yet to be contacted.</font> 
 
 <font size = "4"> Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(PercentInterested)`\%**</font> were interested.</font> 
+
+<font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(Interested)`**</font> participants who are interested, with <font size="4" color="red"> **`r papaja::printnum(ToSched)`**</font> who still need to be scheduled.</font> 
 
 ```{r Attempt Status, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
