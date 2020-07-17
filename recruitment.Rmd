@@ -13,7 +13,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
 library(knitr)
-options(digits=2)
+options(digits=1)
 library(ggpubr)
 library(plotly)
 library(emmeans)
@@ -33,6 +33,25 @@ library(plotrix)
 library(RColorBrewer)
 options(knitr.table.format = "html", knitr.kable.NA = '') 
 ```
+
+```{r Family Statuses, echo = FALSE, message=FALSE}
+#DK Data
+
+FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pilot/Project Management/FamTracker.xlsx")
+
+IntroDate <- as.Date(FamData$`Intro Call Date`, format = "%m/%d/%Y")
+FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
+LENARec <- as.Date(FamData$`LENAs recieved`, format = "%m/%d/%Y")
+LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
+
+
+Introcall <- as.data.frame(table(FamData$`Finished Intro Call`))
+
+SurvComp <- as.data.frame(table(FinishSurveys))
+LENARec <- as.data.frame(table(LENARec))
+LENARet <- as.data.frame(table(LENARet))
+```
+
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
@@ -81,6 +100,9 @@ SchedSuccess <-100*sum(ScheduledCount)/(nrow(Contacted))
 
 ```{r Attempt Status, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
+#Counts of Statuses
+StatusPlot <- barplot(Introcall$Freq, names.arg= Introcall$Var1, main = "Intro Call Statuses", col = brewer.pal(3,"Set2"))
+
 #Attempt Statuses
 
 Attempt1 <- table(DKParsedData$rseal_dklog_025)
@@ -108,6 +130,7 @@ Attempt3Plot <- barplot(Attempt3, beside = TRUE, main = "Attempt 3 Statuses",
         ylab = "Count", legend = c("Scheduled"),
          args.legend = list(x="topright", cex=.7),ylim=c(0,10), xaxt = "n")
 barlabels(Attempt3Plot, Attempt3)
+
 ```   
 ```{r Not Interested Setup, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
