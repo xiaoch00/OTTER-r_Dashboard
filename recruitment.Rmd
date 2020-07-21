@@ -45,7 +45,6 @@ LENARec <- as.Date(FamData$`LENAs recieved`, format = "%m/%d/%Y")
 LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
 
 
-Introcall <- as.data.frame(table(FamData$`Finished Intro Call`))
 
 SurvComp <- as.data.frame(table(FinishSurveys))
 LENARec <- as.data.frame(table(LENARec))
@@ -92,7 +91,7 @@ PercentInterested <- 100*sum(Interested, na.rm=T)/nrow(Contacted)
 SchedSuccess <-100*sum(ScheduledCount)/(nrow(Contacted))
 ```
 
-<font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for their Wave 1 phone call, with a <font size="4" color="red"> **`r papaja::printnum(SchedSuccess)`\%**</font> scheduling success rate (number scheduled out of total contacted).</font>
+<font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for (or have completed) their Wave 1 phone call, with a <font size="4" color="red"> **`r papaja::printnum(SchedSuccess)`\%**</font> scheduling success rate (number scheduled out of total contacted).</font>
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(Interested)`**</font> participants who are interested, with <font size="4" color="red"> **`r papaja::printnum(ToSched)`**</font> who still need to be scheduled.</font> 
 
@@ -101,7 +100,15 @@ SchedSuccess <-100*sum(ScheduledCount)/(nrow(Contacted))
 ```{r Attempt Status, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
 #Counts of Statuses
-StatusPlot <- barplot(Introcall$Freq, names.arg= Introcall$Var1, main = "Intro Call Statuses", col = brewer.pal(3,"Set2"))
+
+Introcall <- table(FamData$`Finished Intro Call`)
+StatusPlot <- barplot(Introcall, beside = TRUE, main = "Intro Call Statuses",
+        col = brewer.pal(4,"Set2"), 
+        xlab = " ",
+        ylab = "Count", legend = c("Potential Dropout","Complete", "Dropout", "Scheduled"),
+        args.legend = list(x="topright", cex=.7),ylim=c(0,20), xaxt = "n")
+barlabels(StatusPlot, Introcall)
+
 
 #Attempt Statuses
 
