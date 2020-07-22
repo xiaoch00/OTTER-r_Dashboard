@@ -89,14 +89,22 @@ NumInterested <-nrow(Interested)
 PercentInterested <- 100*sum(Interested, na.rm=T)/nrow(Contacted)
 
 SchedSuccess <-100*sum(ScheduledCount)/(nrow(Contacted))
+
+AttemptContact <-subset(DKParsedData,
+DKParsedData$rseal_dklog_025 == '1' | DKParsedData$rseal_dklog_025 == '2' | DKParsedData$rseal_dklog_025 == '3' | DKParsedData$rseal_dklog_025 == '4' | DKParsedData$rseal_dklog_025 == '5' | DKParsedData$rseal_dklog_025 == '6' | DKParsedData$rseal_dklog_028 == '1'| DKParsedData$rseal_dklog_028 == '2'| DKParsedData$rseal_dklog_028 == '3'| DKParsedData$rseal_dklog_028 == '4'| DKParsedData$rseal_dklog_028 == '5'| DKParsedData$rseal_dklog_028 == '6'| DKParsedData$rseal_dklog_031 == '1'| DKParsedData$rseal_dklog_031 == '2'| DKParsedData$rseal_dklog_031 == '3'| DKParsedData$rseal_dklog_031 == '4'| DKParsedData$rseal_dklog_031 == '5'| DKParsedData$rseal_dklog_031 == '6' )
+AttemptContact2 <- nrow(AttemptContact)
+
+TotalDK <- nrow(DKParsedData)
+ToCall <- TotalDK-AttemptContact2
 ```
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for (or have completed) their Wave 1 phone call, with a <font size="4" color="red"> **`r papaja::printnum(SchedSuccess)`\%**</font> scheduling success rate (number scheduled out of total contacted).</font>
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(Interested)`**</font> participants who are interested, with <font size="4" color="red"> **`r papaja::printnum(ToSched)`**</font> who still need to be scheduled.</font> 
 
-<font size = "4"> Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(PercentInterested)`\%**</font> were interested, and there are currently <font size="4" color="red"> **`r ToContact`**</font> participants who have yet to be contacted.</font> 
+<font size = "4"> Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(PercentInterested)`\%**</font> were interested, and there are currently <font size="4" color="red"> **`r ToContact`**</font> participants whose interest in participating has not been determined yet.</font> 
 
+<font size = "4"> There are <font size="4" color="red"> **`r papaja::printnum(AttemptContact2)`**</font> participants who have been contacted, and <font size="4" color="red"> **`r papaja::printnum(ToCall)`**</font> who still need to be contacted.</font> 
 ```{r Attempt Status, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
 #Counts of Statuses
