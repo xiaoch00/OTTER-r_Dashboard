@@ -105,6 +105,21 @@ ToCall <- TotalDK-AttemptContact2
 <font size = "4"> Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(PercentInterested)`\%**</font> were interested, and there are currently <font size="4" color="red"> **`r ToContact`**</font> participants whose interest in participating has not been determined yet.</font> 
 
 <font size = "4"> There are <font size="4" color="red"> **`r papaja::printnum(AttemptContact2)`**</font> participants who have been contacted, and <font size="4" color="red"> **`r papaja::printnum(ToCall)`**</font> who still need to be contacted.</font> 
+
+
+``` {r Form Counts, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
+
+Form2 <- table(DKParsedData$rseal_dk_log_complete)
+FormPlot <- barplot(Form2, beside = TRUE, main = "Form Statuses",
+        col = brewer.pal(3,"Set2"), 
+        xlab = " ",
+        ylab = "Count", legend = c("Ineligible or Not Interested", "Still Calling","Scheduled"),
+        args.legend = list(x="topright", cex=.7),ylim=c(0,80), xaxt = "n")
+barlabels(FormPlot, Form2)
+
+```  
+
+
 ```{r Attempt Status, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
 #Counts of Statuses
@@ -172,6 +187,7 @@ rownames(NotInt3) <- c("Unknown", "Time Commitment","Too Stressed","Don't need h
 <font size = "4"> **Counts and reasons given by those not interested in participating.**</font> 
 
 ``` {r Not Interested Reasons, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
+
 kable(NotInt3) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
 ```  
