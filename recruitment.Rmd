@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 7/28/2020"
+date: "Last Updated: 7/29/2020"
 output: 
   html_document:
     theme: flatly
@@ -97,6 +97,7 @@ AttemptContact2 <- nrow(AttemptContact)
 TotalDK <- nrow(DKParsedData)
 ToCall <- TotalDK-AttemptContact2
 ```
+The qualtrics dashboard which shows how many many surveys are complete by participant can be accessed here: https://ql.tc/UFAErS
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for (or have completed) their Wave 1 phone call, with a <font size="4" color="red"> **`r papaja::printnum(SchedSuccess)`\%**</font> scheduling success rate (number scheduled out of total contacted).</font>
 
@@ -105,6 +106,7 @@ ToCall <- TotalDK-AttemptContact2
 <font size = "4"> Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(PercentInterested)`\%**</font> were interested, and there are currently <font size="4" color="red"> **`r ToContact`**</font> participants whose interest in participating has not been determined yet.</font> 
 
 <font size = "4"> There are <font size="4" color="red"> **`r papaja::printnum(AttemptContact2)`**</font> participants who have been contacted, and <font size="4" color="red"> **`r papaja::printnum(ToCall)`**</font> who still need to be contacted.</font> 
+
 
 
 ``` {r Form Counts, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
