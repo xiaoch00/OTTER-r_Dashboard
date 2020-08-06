@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 7/31/2020"
+date: "Last Updated: 8/6/2020"
 output: 
   html_document:
     theme: flatly
@@ -40,13 +40,13 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pilot/Project Management/FamTracker.xlsx")
 
 IntroDate <- as.Date(FamData$`Intro Call Date`, format = "%m/%d/%Y")
-FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
+#FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
 LENARec <- as.Date(FamData$`LENAs recieved`, format = "%m/%d/%Y")
 LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
 
 
 
-SurvComp <- as.data.frame(table(FinishSurveys))
+#SurvComp <- as.data.frame(table(FinishSurveys))
 LENARec <- as.data.frame(table(LENARec))
 LENARet <- as.data.frame(table(LENARet))
 ```
@@ -54,7 +54,7 @@ LENARet <- as.data.frame(table(LENARet))
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_28JUL2020.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_06AUG2020.csv')
 
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
@@ -147,19 +147,19 @@ barlabels(Attempt1Plot, Attempt1)
 
 Attempt2 <- table(DKParsedData$rseal_dklog_028)
 Attempt2Plot <- barplot(Attempt2,
-        col = brewer.pal(3,"Set2"), 
+        col = brewer.pal(6,"Set2"), 
         main = "Attempt 2 Statuses",
         xlab = " ",
-        ylab = "Count", legend = c("Contact family", "Non-responsive/Disconnected", "Ineligible"),
+        ylab = "Count", legend = c("Contact family","Requested Call Back", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
         args.legend = list(x="topright", cex=.7), ylim=c(0,20),
         xaxt = "n")
 barlabels(Attempt2Plot, Attempt2)
 
 Attempt3 <- table(DKParsedData$rseal_dklog_031)
 Attempt3Plot <- barplot(Attempt3, beside = TRUE, main = "Attempt 3 Statuses",
-        col = c("#e78ac3"),
+        col = c("#8DA0CB","#e78ac3"),
          xlab = " ",
-        ylab = "Count", legend = c("Scheduled"),
+        ylab = "Count", legend = c("Non-responsive/Disconnected", "Scheduled"),
          args.legend = list(x="topright", cex=.7),ylim=c(0,10), xaxt = "n")
 barlabels(Attempt3Plot, Attempt3)
 
