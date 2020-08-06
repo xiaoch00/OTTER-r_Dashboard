@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 7/31/2020"
+date: "Last Updated: 8/6/2020"
 output: 
   html_document:
     theme: flatly
@@ -40,13 +40,13 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pilot/Project Management/FamTracker.xlsx")
 
 IntroDate <- as.Date(FamData$`Intro Call Date`, format = "%m/%d/%Y")
-FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
+#FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
 LENARec <- as.Date(FamData$`LENAs recieved`, format = "%m/%d/%Y")
 LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
 
 
 
-SurvComp <- as.data.frame(table(FinishSurveys))
+#SurvComp <- as.data.frame(table(FinishSurveys))
 LENARec <- as.data.frame(table(LENARec))
 LENARet <- as.data.frame(table(LENARet))
 ```
@@ -54,7 +54,7 @@ LENARet <- as.data.frame(table(LENARet))
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_28JUL2020.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_06AUG2020.csv')
 
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
