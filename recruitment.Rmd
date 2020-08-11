@@ -96,10 +96,35 @@ AttemptContact2 <- nrow(AttemptContact)
 
 TotalDK <- nrow(DKParsedData)
 ToCall <- TotalDK-AttemptContact2
+
+
+#DHS PercentInterested and scheduling success rate
+
+DHSsubset <- subset(DKParsedData, DKParsedData$rseal_dklog_006 == '2')
+DHSCount <- nrow(DHSsubset)
+
+DHSInterested <- subset(DHSsubset, DHSsubset$rseal_dklog_009 == '1')
+DHSInterested <- nrow(DHSInterested)
+
+DHSScheduled <-subset(DHSsubset,DHSsubset$rseal_dklog_025 == '4' | DHSsubset$rseal_dklog_028 == '4'| DHSsubset$rseal_dklog_031 == '4' )
+
+DHSScheduledCount <- nrow(DHSScheduled)
+
+DHSContacted <- subset(DHSsubset, DHSsubset$rseal_dklog_009 == '1' | DHSsubset$rseal_dklog_009 == '0')
+
+DHSContacted <- nrow(DHSContacted)
+
+DHSNumInterested <-nrow(DHSInterested)
+DHSPercentInterested <- 100*sum(DHSInterested, na.rm=T)/DHSContacted
+
+DHSSchedSuccess <-100*sum(DHSScheduledCount)/DHSContacted
+
 ```
 The qualtrics dashboard which shows how many many surveys are complete by participant can be accessed here: https://ql.tc/UFAErS
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for (or have completed) their Wave 1 phone call, with a <font size="4" color="red"> **`r papaja::printnum(SchedSuccess)`\%**</font> scheduling success rate (number scheduled out of total contacted).</font>
+
+<font size = "4"> So far, there are <font size="4" color="red"> **`r papaja::printnum(DHSCount)`**</font> potential participants from DHS Mailer, <font size="4" color="red"> **`r papaja::printnum(DHSContacted)`**</font> of whom have been contacted. Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(DHSPercentInterested)`\%**</font> showed interest and <font size="4" color="red"> **`r papaja::printnum(DHSSchedSuccess)`\%**</font> got scheduled successfully.</font>
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(Interested)`**</font> participants who are interested, with <font size="4" color="red"> **`r papaja::printnum(ToSched)`**</font> who still need to be scheduled.</font> 
 
@@ -142,7 +167,7 @@ Attempt1Plot <- barplot(Attempt1, beside = TRUE, main = "Attempt 1 Statuses",
         col = brewer.pal(6,"Set2"), 
         xlab = " ",
         ylab = "Count", legend = c("Contact family","Requested Call Back", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-        args.legend = list(x="topright", cex=.7),ylim=c(0,20), xaxt = "n")
+        args.legend = list(x="topright", cex=.7),ylim=c(0,50), xaxt = "n")
 barlabels(Attempt1Plot, Attempt1)
 
 Attempt2 <- table(DKParsedData$rseal_dklog_028)
