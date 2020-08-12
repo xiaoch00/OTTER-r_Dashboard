@@ -36,6 +36,7 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 
 ```
 
-```{r shiny-app}
-knitr::include_app('https://dat-snaplab.shinyapps.io/shinypassword/')
-```
+
+
+<iframe src ="https://dat-snaplab.shinyapps.io/shinypassword/" style="border: none; width: 100%; height: 500px;"/>
+</iframe>
