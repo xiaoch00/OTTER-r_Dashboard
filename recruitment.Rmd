@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 8/11/2020"
+date: "Last Updated: 8/13/2020"
 output: 
   html_document:
     theme: flatly
@@ -54,7 +54,7 @@ LENARet <- as.data.frame(table(LENARet))
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_11AUG2020.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_13AUG2020.csv')
 
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
@@ -141,7 +141,7 @@ FormPlot <- barplot(Form2, beside = TRUE, main = "Form Statuses",
         col = brewer.pal(3,"Set2"), 
         xlab = " ",
         ylab = "Count", legend = c("Ineligible or Not Interested", "Still Calling","Scheduled"),
-        args.legend = list(x="topright", cex=.7),ylim=c(0,80), xaxt = "n")
+        args.legend = list(x="topright", cex=.7),ylim=c(0,110), xaxt = "n")
 barlabels(FormPlot, Form2)
 
 ```  
@@ -176,7 +176,7 @@ Attempt2Plot <- barplot(Attempt2,
         main = "Attempt 2 Statuses",
         xlab = " ",
         ylab = "Count", legend = c("Contact family","Requested Call Back", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-        args.legend = list(x="topright", cex=.7), ylim=c(0,20),
+        args.legend = list(x="topright", cex=.7), ylim=c(0,30),
         xaxt = "n")
 barlabels(Attempt2Plot, Attempt2)
 
