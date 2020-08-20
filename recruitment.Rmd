@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 8/17/2020"
+date: "Last Updated: 8/20/2020"
 output: 
   html_document:
     theme: flatly
@@ -41,20 +41,20 @@ FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pi
 
 IntroDate <- as.Date(FamData$`Intro Call Date`, format = "%m/%d/%Y")
 #FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
-LENARec <- as.Date(FamData$`LENAs recieved`, format = "%m/%d/%Y")
+#LENARec <- as.Date(FamData$`LENAs recieved`, format = "%m/%d/%Y")
 LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
 
 
 
 #SurvComp <- as.data.frame(table(FinishSurveys))
-LENARec <- as.data.frame(table(LENARec))
+#LENARec <- as.data.frame(table(LENARec))
 LENARet <- as.data.frame(table(LENARet))
 ```
 
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_17AUG2020.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_20AUG2020.csv')
 
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
@@ -74,9 +74,9 @@ ScheduledCount <- nrow(Scheduled)
 
 #Number in DK Log compared to how many contacted so far
 
-Contacted <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1' | DKParsedData$rseal_dklog_009 == '0')
+#Contacted <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1' | DKParsedData$rseal_dklog_009 == '0')
 
-ToContact <- sum(nrow(DKParsedData) - nrow(Contacted))
+#ToContact <- sum(nrow(DKParsedData) - nrow(Contacted))
 
 #Relative success rate (Number interested)
 
@@ -86,13 +86,17 @@ Interested <- nrow(Interested)
 ToSched <- Interested - ScheduledCount
 
 NumInterested <-nrow(Interested)
-PercentInterested <- 100*sum(Interested, na.rm=T)/nrow(Contacted)
 
-SchedSuccess <-100*sum(ScheduledCount)/(nrow(Contacted))
 
 AttemptContact <-subset(DKParsedData,
 DKParsedData$rseal_dklog_025 == '1' | DKParsedData$rseal_dklog_025 == '2' | DKParsedData$rseal_dklog_025 == '3' | DKParsedData$rseal_dklog_025 == '4' | DKParsedData$rseal_dklog_025 == '5' | DKParsedData$rseal_dklog_025 == '6' | DKParsedData$rseal_dklog_028 == '1'| DKParsedData$rseal_dklog_028 == '2'| DKParsedData$rseal_dklog_028 == '3'| DKParsedData$rseal_dklog_028 == '4'| DKParsedData$rseal_dklog_028 == '5'| DKParsedData$rseal_dklog_028 == '6'| DKParsedData$rseal_dklog_031 == '1'| DKParsedData$rseal_dklog_031 == '2'| DKParsedData$rseal_dklog_031 == '3'| DKParsedData$rseal_dklog_031 == '4'| DKParsedData$rseal_dklog_031 == '5'| DKParsedData$rseal_dklog_031 == '6' )
 AttemptContact2 <- nrow(AttemptContact)
+
+ToContact <- sum(nrow(DKParsedData) - AttemptContact2)
+
+PercentInterested <- 100*sum(Interested, na.rm=T)/AttemptContact2
+
+SchedSuccess <-100*sum(ScheduledCount)/AttemptContact2
 
 TotalDK <- nrow(DKParsedData)
 ToCall <- TotalDK-AttemptContact2
@@ -110,7 +114,8 @@ DHSScheduled <-subset(DHSsubset,DHSsubset$rseal_dklog_025 == '4' | DHSsubset$rse
 
 DHSScheduledCount <- nrow(DHSScheduled)
 
-DHSContacted <- subset(DHSsubset, DHSsubset$rseal_dklog_009 == '1' | DHSsubset$rseal_dklog_009 == '0')
+DHSContacted <- AttemptContact <-subset(DHSsubset,
+DHSsubset$rseal_dklog_025 == '1' | DHSsubset$rseal_dklog_025 == '2' | DHSsubset$rseal_dklog_025 == '3' | DHSsubset$rseal_dklog_025 == '4' | DHSsubset$rseal_dklog_025 == '5' | DHSsubset$rseal_dklog_025 == '6' | DHSsubset$rseal_dklog_028 == '1'| DHSsubset$rseal_dklog_028 == '2'| DHSsubset$rseal_dklog_028 == '3'| DHSsubset$rseal_dklog_028 == '4'| DHSsubset$rseal_dklog_028 == '5'| DHSsubset$rseal_dklog_028 == '6'| DHSsubset$rseal_dklog_031 == '1'| DHSsubset$rseal_dklog_031 == '2'| DHSsubset$rseal_dklog_031 == '3'| DHSsubset$rseal_dklog_031 == '4'| DHSsubset$rseal_dklog_031 == '5'| DHSsubset$rseal_dklog_031 == '6' )
 
 DHSContacted <- nrow(DHSContacted)
 
@@ -123,8 +128,6 @@ The qualtrics dashboard which shows how many many surveys are complete by partic
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for (or have completed) their Wave 1 phone call, with a <font size="4" color="red"> **`r papaja::printnum(SchedSuccess)`\%**</font> scheduling success rate (number scheduled out of total contacted).</font>
 
-<font size = "4"> So far, there are <font size="4" color="red"> **`r papaja::printnum(DHSCount)`**</font> potential participants from DHS Mailer, <font size="4" color="red"> **`r papaja::printnum(DHSContacted)`**</font> of whom have been contacted. Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(DHSPercentInterested)`\%**</font> showed interest and <font size="4" color="red"> **`r papaja::printnum(DHSSchedSuccess)`\%**</font> got scheduled successfully.</font>
-
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(Interested)`**</font> participants who are interested, with <font size="4" color="red"> **`r papaja::printnum(ToSched)`**</font> who still need to be scheduled.</font> 
 
 <font size = "4"> Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(PercentInterested)`\%**</font> were interested, and there are currently <font size="4" color="red"> **`r ToContact`**</font> participants whose interest in participating has not been determined yet.</font> 
@@ -132,6 +135,7 @@ The qualtrics dashboard which shows how many many surveys are complete by partic
 <font size = "4"> There are <font size="4" color="red"> **`r papaja::printnum(AttemptContact2)`**</font> participants who have been contacted, and <font size="4" color="red"> **`r papaja::printnum(ToCall)`**</font> who still need to be contacted.</font> 
 
 
+<font size = "4"> So far, there are <font size="4" color="red"> **`r papaja::printnum(DHSCount)`**</font> potential participants from DHS Mailer, <font size="4" color="red"> **`r papaja::printnum(DHSContacted)`**</font> of whom have been contacted. Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(DHSInterested)` (`r papaja::printnum(DHSPercentInterested)`\%)**</font> participants showed interest and <font size="4" color="red"> **`r papaja::printnum(DHSScheduledCount)` (`r papaja::printnum(DHSSchedSuccess)`\%)**</font> participants got scheduled successfully.</font>
 
 ``` {r Form Counts, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
@@ -154,7 +158,7 @@ Introcall <- table(FamData$`Finished Intro Call`)
 StatusPlot <- barplot(Introcall, beside = TRUE, main = "Intro Call Statuses",
         col = brewer.pal(4,"Set2"), 
         xlab = " ",
-        ylab = "Count", legend = c("Potential Dropout","Complete", "Dropout", "Scheduled"),
+        ylab = "Count", legend = c("Complete", "Dropout", "Scheduled", "Potential Dropout"),
         args.legend = list(x="topright", cex=.7),ylim=c(0,20), xaxt = "n")
 barlabels(StatusPlot, Introcall)
 
