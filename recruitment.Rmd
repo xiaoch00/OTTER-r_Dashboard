@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 8/24/2020"
+date: "Last Updated: 8/25/2020"
 output: 
   html_document:
     theme: flatly
@@ -54,7 +54,7 @@ LENARet <- as.data.frame(table(LENARet))
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_24AUG2020.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_25AUG2020.csv')
 
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
@@ -170,7 +170,7 @@ Attempt1Plot <- barplot(Attempt1, beside = TRUE, main = "Attempt 1 Statuses",
         col = brewer.pal(6,"Set2"), 
         xlab = " ",
         ylab = "Count", legend = c("Contact family","Requested Call Back", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-        args.legend = list(x="topright", cex=.7),ylim=c(0,60), xaxt = "n")
+        args.legend = list(x="topright", cex=.7),ylim=c(0,80), xaxt = "n")
 barlabels(Attempt1Plot, Attempt1)
 
 Attempt2 <- table(DKParsedData$rseal_dklog_028)
@@ -179,7 +179,7 @@ Attempt2Plot <- barplot(Attempt2,
         main = "Attempt 2 Statuses",
         xlab = " ",
         ylab = "Count", legend = c("Contact family","Requested Call Back", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-        args.legend = list(x="topright", cex=.7), ylim=c(0,30),
+        args.legend = list(x="topright", cex=.7), ylim=c(0,40),
         xaxt = "n")
 barlabels(Attempt2Plot, Attempt2)
 
