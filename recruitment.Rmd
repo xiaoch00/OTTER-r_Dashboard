@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 8/27/2020"
+date: "Last Updated: 8/31/2020"
 output: 
   html_document:
     theme: flatly
@@ -54,7 +54,7 @@ LENARet <- as.data.frame(table(LENARet))
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_27AUG2020.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_31AUG2020.csv')
 
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
@@ -67,6 +67,8 @@ DKParsedData <- as_tibble(DKParsedData)
 
 
 ```{r recruitment, echo=FALSE, message=FALSE, warning=FALSE}
+
+Ntotal <- nrow(DKParsedData)
 
 Scheduled <-subset(DKParsedData,DKParsedData$rseal_dklog_025 == '4' | DKParsedData$rseal_dklog_028 == '4'| DKParsedData$rseal_dklog_031 == '4' )
 
@@ -87,6 +89,8 @@ ToSched <- Interested - ScheduledCount
 
 NumInterested <-nrow(Interested)
 
+Eligible <- subset(DKParsedData, DKParsedData$eligibility == '1'| DKParsedData$rseal_dklog_038 == '1')
+Eligible <- nrow(Eligible)
 
 AttemptContact <-subset(DKParsedData,
 DKParsedData$rseal_dklog_025 == '1' | DKParsedData$rseal_dklog_025 == '2' | DKParsedData$rseal_dklog_025 == '3' | DKParsedData$rseal_dklog_025 == '4' | DKParsedData$rseal_dklog_025 == '5' | DKParsedData$rseal_dklog_025 == '6' | DKParsedData$rseal_dklog_028 == '1'| DKParsedData$rseal_dklog_028 == '2'| DKParsedData$rseal_dklog_028 == '3'| DKParsedData$rseal_dklog_028 == '4'| DKParsedData$rseal_dklog_028 == '5'| DKParsedData$rseal_dklog_028 == '6'| DKParsedData$rseal_dklog_031 == '1'| DKParsedData$rseal_dklog_031 == '2'| DKParsedData$rseal_dklog_031 == '3'| DKParsedData$rseal_dklog_031 == '4'| DKParsedData$rseal_dklog_031 == '5'| DKParsedData$rseal_dklog_031 == '6' )
@@ -125,6 +129,8 @@ DHSSchedSuccess <-100*DHSScheduledCount/DHSContacted
 
 ```
 The qualtrics dashboard which shows how many many surveys are complete by participant can be accessed here: https://ql.tc/UFAErS
+
+<font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(Ntotal)`**</font> potential participants in DK LOG, <font size="4" color="red"> **`r papaja::printnum(AttemptContact2)`**</font> of whom have been contacted and <font size="4" color="red"> **`r papaja::printnum(Eligible)`**</font> have been confirmed as eligible.</font>
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(ScheduledCount)`**</font> participants scheduled for (or have completed) their Wave 1 phone call, with a <font size="4" color="red"> **`r papaja::printnum(SchedSuccess)`\%**</font> scheduling success rate (number scheduled out of total contacted).</font>
 
