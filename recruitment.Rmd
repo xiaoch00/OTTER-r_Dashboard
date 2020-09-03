@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 9/1/2020"
+date: "Last Updated: 9/3/2020"
 output: 
   html_document:
     theme: flatly
@@ -31,6 +31,7 @@ library(plyr)
 library(tigerstats)
 library(plotrix)
 library(RColorBrewer)
+library(reshape2)
 options(knitr.table.format = "html", knitr.kable.NA = '') 
 ```
 
@@ -39,22 +40,22 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 
 FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pilot/Project Management/FamTracker.xlsx")
 
-IntroDate <- as.Date(FamData$`Intro Call Date`, format = "%m/%d/%Y")
+#IntroDate <- as.Date(FamData$`Intro Call Date`, format = "%m/%d/%Y")
 #FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
 #LENARec <- as.Date(FamData$`LENAs recieved`, format = "%m/%d/%Y")
-LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
+#LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
 
 
 
 #SurvComp <- as.data.frame(table(FinishSurveys))
 #LENARec <- as.data.frame(table(LENARec))
-LENARet <- as.data.frame(table(LENARet))
+#LENARet <- as.data.frame(table(LENARet))
 ```
 
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_1SEPT2020.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_3SEPT2020.csv')
 
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
@@ -89,7 +90,10 @@ ToSched <- Interested - ScheduledCount
 
 NumInterested <-nrow(Interested)
 
-Eligible <- subset(DKParsedData, DKParsedData$eligibility == '1'| DKParsedData$rseal_dklog_038 == '1')
+DKParsedData$eligibility <- ifelse(DKParsedData$rseal_dklog_012 == '1' & DKParsedData$rseal_dklog_013 == '1' & DKParsedData$rseal_dklog_014 == '1' & DKParsedData$rseal_dklog_015 == '1' & DKParsedData$rseal_dklog_018 == '1' & DKParsedData$rseal_dklog_020 == '1' & DKParsedData$rseal_dklog_021 == '1', TRUE,FALSE)
+
+
+Eligible <- subset(DKParsedData, DKParsedData$eligibility == 1| DKParsedData$rseal_dklog_038 == '1')
 Eligible <- nrow(Eligible)
 
 AttemptContact <-subset(DKParsedData,
@@ -128,7 +132,7 @@ DHSPercentInterested <- 100*DHSInterested/DHSContacted
 DHSSchedSuccess <-100*DHSScheduledCount/DHSContacted
 
 ```
-The qualtrics dashboard which shows how many many surveys are complete by participant can be accessed here: https://ql.tc/UFAErS
+
 
 <font size = "4"> There are currently <font size="4" color="red"> **`r papaja::printnum(Ntotal)`**</font> potential participants in DK LOG, <font size="4" color="red"> **`r papaja::printnum(AttemptContact2)`**</font> of whom have been contacted and <font size="4" color="red"> **`r papaja::printnum(Eligible)`**</font> have been confirmed as eligible.</font>
 
@@ -198,6 +202,8 @@ Attempt3Plot <- barplot(Attempt3, beside = TRUE, main = "Attempt 3 Statuses",
 barlabels(Attempt3Plot, Attempt3)
 
 ```   
+
+
 ```{r Not Interested Setup, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 
 #Not Interested Reasons
@@ -227,3 +233,29 @@ rownames(NotInt3) <- c("Unknown", "Time Commitment","Too Stressed","Don't need h
 kable(NotInt3) %>%
   kable_styling(bootstrap_options = "striped", full_width = F, position = "left")
 ```  
+
+
+```{r RA calls, echo = FALSE, message=FALSE}
+# for summary of RA calls
+
+RAcalls1 <- select (DKdata, rseal_dklog_025, rseal_dklog_026, rseal_dklog_035)
+RAcalls1 <- as_tibble(RAcalls1)
+names(RAcalls1)<-c("AttStatus","AttDate", "RA")
+
+RAcalls2 <- select (DKdata, rseal_dklog_028, rseal_dklog_029, rseal_dklog_036)
+RAcalls2 <- as_tibble(RAcalls2)
+names(RAcalls2)<-c("AttStatus","AttDate", "RA")
+
+RAcalls3 <- select (DKdata, rseal_dklog_031, rseal_dklog_032, rseal_dklog_037)
+RAcalls3 <- as_tibble(RAcalls3)
+names(RAcalls3)<-c("AttStatus","AttDate", "RA")
+
+RAcalls <- rbind(RAcalls1, RAcalls2, RAcalls3)
+
+RASum <- RAcalls %>% 
+      group_by(RA) %>% tally()
+
+kable(RASum) %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+```
