@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 9/3/2020"
+date: "Last Updated: 9/10/2020"
 output: 
   html_document:
     theme: flatly
@@ -55,7 +55,7 @@ FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pi
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_3SEPT2020.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/rSEALDKLOG_10SEPT2020.csv')
 
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
@@ -198,7 +198,7 @@ Attempt3Plot <- barplot(Attempt3, beside = TRUE, main = "Attempt 3 Statuses",
         col = brewer.pal(5,"Set2"), 
          xlab = " ",
         ylab = "Count", legend = c("Contact family", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-         args.legend = list(x="topright", cex=.7),ylim=c(0,10), xaxt = "n")
+         args.legend = list(x="topright", cex=.7),ylim=c(0,20), xaxt = "n")
 barlabels(Attempt3Plot, Attempt3)
 
 ```   
@@ -252,10 +252,14 @@ names(RAcalls3)<-c("AttStatus","AttDate", "RA")
 
 RAcalls <- rbind(RAcalls1, RAcalls2, RAcalls3)
 
+#print.data.frame(RAcalls)
 RASum <- RAcalls %>% 
       group_by(RA) %>% tally()
 
+RASum <- RASum[-1,]
 kable(RASum) %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
+
+
 
 ```
