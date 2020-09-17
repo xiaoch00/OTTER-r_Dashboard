@@ -36,6 +36,6 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 
 
 
-<iframe src ="https://dat-snaplab.shinyapps.io/shinypassword/" style="border: none; width: 1000px; height: 1000px;"/>
+<iframe src ="https://dat-snaplab.shinyapps.io/shinypassword/" style="border: none; width: 1500px; height: 1000px;"/>
 </iframe>
 
