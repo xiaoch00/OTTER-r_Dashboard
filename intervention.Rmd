@@ -5,8 +5,6 @@ date: "Last Updated: 8/12/2020"
 output: 
   html_document:
     theme: flatly
-    toc: TRUE
-    toc_float: TRUE
 ---
 ```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
 
