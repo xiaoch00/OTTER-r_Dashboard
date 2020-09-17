@@ -34,7 +34,13 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 
 ```
 
-
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 
 <iframe src ="https://dat-snaplab.shinyapps.io/shinypassword/" style="border: none; width: 1500px; height: 1000px;"/>
 </iframe>
