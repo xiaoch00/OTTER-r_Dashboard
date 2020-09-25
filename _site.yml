@@ -8,6 +8,8 @@ navbar:
       menu:
       - text: "Recruitment"
         href: recruitment.html
+      - text: "Consort"
+        href: consort.html
       - text: "Intervention"
         href: intervention.html
       - text: "Current Enrollment"

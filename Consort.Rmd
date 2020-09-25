@@ -1,0 +1,73 @@
+---
+title: "Recruitment"
+author: 
+date: "Last Updated: 9/25/2020"
+output: 
+  html_document:
+    theme: flatly
+    toc: TRUE
+    toc_float: TRUE
+---
+```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(knitr)
+library(ggpubr)
+library(plotly)
+library(emmeans)
+library(papaja)
+library(kableExtra)
+library(dplyr)
+library(tidyverse)
+library(ggformula)
+library(lubridate)
+library(plyr)
+library(RColorBrewer)
+library(DiagrammeR)
+options(knitr.table.format = "html", knitr.kable.NA = '') 
+```
+
+```{r DK Log variable setup, echo = FALSE, message=FALSE}
+#DK Data
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/RSEALDKLOG_24SEPTDATA.csv')
+
+Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
+Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
+Atempt3Date <- as.Date(DKdata$rseal_dklog_032, format = "%m/%d/%Y")
+
+DKParsedData <- select (DKdata, rseal_dkid,rseal_dklog_006:rseal_dk_log_complete )
+
+```
+
+
+```{r Consort Diagram, echo = FALSE, message=FALSE}
+#Consort Diagram
+
+TotalContact <-nrow(DKParsedData)
+Interested <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1')
+Interested <- nrow(Interested)
+Eligible <- subset(DKParsedData, DKParsedData$rseal_dklog_038 == '1')
+Eligible <- nrow(Eligible)
+
+DiagrammeR::grViz("
+digraph graph2 {
+
+graph [layout = dot]
+
+# node definitions with substituted label text
+node [shape = rectangle, width = 4, fillcolor = Biege]
+a [label = '@@1']
+b [label = '@@2']
+c [label = '@@3']
+
+a -> b -> c
+
+}
+
+[1]: paste0('Total Contacted (n = ', TotalContact, ')')
+[2]: paste0('Total Interested (n = ', Interested, ')')
+[3]: paste0('Total Eligible (n = ', Eligible, ')')
+")
+
+```
