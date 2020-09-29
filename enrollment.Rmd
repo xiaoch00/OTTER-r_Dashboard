@@ -1,7 +1,7 @@
 ---
 title: "Current Enrollment"
 author: 
-date: "Last Updated: 9/24/2020"
+date: "Last Updated: 9/29/2020"
 output: 
   html_document:
     theme: flatly
@@ -32,6 +32,7 @@ library(tigerstats)
 library(plotrix)
 library(RColorBrewer)
 library(reshape2)
+library(DT)
 options(knitr.table.format = "html", knitr.kable.NA = '') 
 ```
 
@@ -88,8 +89,21 @@ FamTrackerTrans <- as.data.frame(FamTrackerTrans)
 FamTrackerTrans <- FamTrackerTrans[-1,]
 names(FamTrackerTrans)<-c("IntroCall","Survey1", "Survey2", "PDR2", "PDR3", "LENA1", "LENA2")
 
-kable(FamTrackerTrans) %>%
-  kable_styling(bootstrap_options = c("striped", "hover"))
+datatable(
+    FamTrackerTrans,
+
+  options = list(lengthMenu=list(c(5,15,20),c('5','15','20')),pageLength=50,scrollX=TRUE,scrollCollapse=TRUE,
+                 initComplete = JS(
+                   "function(settings, json) {",
+                   "$(this.api().table().header()).css({'background-color': '#F0F8FF', 'color': '1c1b1b'});",
+                   "}"),
+                 columnDefs=list(list(className='dt-center',targets="_all"))
+  ),
+  filter = "top",
+  selection = 'multiple',
+  style = 'bootstrap',
+  class = 'cell-border stripe'
+  ) 
 
 ```
 

@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 9/28/2020"
+date: "Last Updated: 9/29/2020"
 output: 
   html_document:
     theme: flatly
@@ -55,7 +55,7 @@ FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pi
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/RSEALDKLog_28SEPTDATA.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/Wave_1/RedCap/DK_Log/RSEALDKLog_29SEPTDATA.csv')
 
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
@@ -90,10 +90,10 @@ ToSched <- Interested - ScheduledCount
 
 NumInterested <-nrow(Interested)
 
-DKParsedData$eligibility <- ifelse(DKParsedData$rseal_dklog_012 == '1' & DKParsedData$rseal_dklog_013 == '1' & DKParsedData$rseal_dklog_014 == '1' & DKParsedData$rseal_dklog_015 == '1' & DKParsedData$rseal_dklog_018 == '1' & DKParsedData$rseal_dklog_020 == '1' & DKParsedData$rseal_dklog_021 == '1', TRUE,FALSE)
+#DKParsedData$eligibility <- ifelse(DKParsedData$rseal_dklog_012 == '1' & DKParsedData$rseal_dklog_013 == '1' & #DKParsedData$rseal_dklog_014 == '1' & DKParsedData$rseal_dklog_015 == '1' & (DKParsedData$rseal_dklog_018 == #'1'|DKParsedData$rseal_dklog_019___1 == '1'|DKParsedData$rseal_dklog_019___2 == '1'|DKParsedData$rseal_dklog_019___3 == #'1'|DKParsedData$rseal_dklog_019___4 == '1')& DKParsedData$rseal_dklog_020 == '1' & DKParsedData$rseal_dklog_021 == '1', #TRUE,FALSE)
 
 
-Eligible <- subset(DKParsedData, DKParsedData$eligibility == 1| DKParsedData$rseal_dklog_038 == '1')
+Eligible <- subset(DKParsedData, DKParsedData$rseal_dklog_038 == '1')
 Eligible <- nrow(Eligible)
 
 AttemptContact <-subset(DKParsedData,
