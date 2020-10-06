@@ -87,17 +87,12 @@ FamTrackerTrans <- dcast(FamTrackerDt, Completed ~ RSID, value.var = 'Dt')
 FamTrackerTrans <- t(FamTrackerTrans)
 FamTrackerTrans <- as.data.frame(FamTrackerTrans)
 FamTrackerTrans <- FamTrackerTrans[-1,]
-names(FamTrackerTrans)<-c("IntroCall","Survey1", "Survey2", "PDR2", "PDR3", "LENA1", "LENA2")
+names(FamTrackerTrans)<-c("IntroCall","Survey1", "Survey2", "PDR2", "PDR3", "LENA1", "LENA2","Notes")
 
 datatable(
     FamTrackerTrans,
 
-  options = list(lengthMenu=list(c(5,15,20),c('5','15','20')),pageLength=50,scrollX=TRUE,scrollCollapse=TRUE,
-                 initComplete = JS(
-                   "function(settings, json) {",
-                   "$(this.api().table().header()).css({'background-color': '#F0F8FF', 'color': '1c1b1b'});",
-                   "}"),
-                 columnDefs=list(list(className='dt-center',targets="_all"))
+  options = list(lengthMenu=list(c(5,15,20),c('5','15','20')),pageLength=50,scrollX=TRUE,scrollCollapse=TRUE,columnDefs=list(list(className='dt-center',targets="_all"))
   ),
   filter = "top",
   selection = 'multiple',
