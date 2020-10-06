@@ -8,8 +8,14 @@ navbar:
       menu:
       - text: "Consort"
         href: consort.html
+      - text: "Sources"
+        href: Sources.html
+      - text: "Intervention"
+        href: intervention.html
       - text: "Demographics"
         href: demographics.html
+      - text: "Recruitment"
+        href: recruitment.html
       - text: "Project Management"
         href: projectmgmt.html
     - text: "Measures Summaries"

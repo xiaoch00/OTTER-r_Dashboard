@@ -9,11 +9,8 @@ output:
     toc_float: TRUE
 ---
 
-```{r setup, include = FALSE, echo = FALSE, cache = FALSE}
-knitr::opts_chunk$set(
-  comment = NA,
-  warning = FALSE,
-  message = FALSE)
+```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
+knitr::include_app('https://dat-snaplab.shinyapps.io/shinypassword/', height = '600px')
 ```
 
 
@@ -31,4 +28,3 @@ This section will have the following:
   
   
   - Consort Diagram
-
