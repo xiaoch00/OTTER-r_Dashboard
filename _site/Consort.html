@@ -11,7 +11,7 @@
 
 
 
-<title>Recruitment</title>
+<title>Consort</title>
 
 <script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -20,9 +20,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -258,69 +255,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -328,16 +262,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -473,20 +397,18 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Recruitment</h1>
+<h1 class="title toc-ignore">Consort</h1>
 <h4 class="author"></h4>
-<h4 class="date">Last Updated: 9/25/2020</h4>
+<h4 class="date">Last Updated: 10/05/2020</h4>
 
 </div>
 
 
 <div id="htmlwidget-dced913909e2394732a2" style="width:672px;height:480px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-dced913909e2394732a2">{"x":{"diagram":"\ndigraph graph2 {\n\ngraph [layout = dot]\n\n# node definitions with substituted label text\nnode [shape = rectangle, width = 4, fillcolor = Biege]\na [label = \"Total Contacted (n = 132)\"]\nb [label = \"Total Interested (n = 57)\"]\nc [label = \"Total Eligible (n = 48)\"]\n\na -> b -> c\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-dced913909e2394732a2">{"x":{"diagram":"digraph consort {\n\n# node definitions with substituted label text\nnode [shape = rectangle, fontname = Helvetica, penwidth = 2.0, fontname = Helvetica]\nA [label = \"Total in DK Log (n = 132)\"]\nB [label = \"Total Interested (n = 0)\"]\nC [label = \"Total Eligible (n = 48)\"]\nD [label = \"Not Interested (n = 0)\", href=\"./Sources.html\"]\nE [label = \"Recruitment Information\", href=\"./Sources.html\"]\nF [label = \"Wave 1 Complete\"]\nG [label = \"Wave 2 Complete\"]\nH [label = \"Wave 3 Complete\"]\nI [label = \"Wave 1 Not Complete\"]\nJ [label = \"Wave 2 Not Complete\"]\nK [label = \"Wave 3 Not Complete\"]\nL [label = \"Wave 3 Not Complete\"]\n\nA -> B; A->D; B->C; E;C->F; F->G; G->H; C->I; I->J;J->K\n}\n\n#Define Labels","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -519,32 +441,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
