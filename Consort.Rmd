@@ -1,12 +1,11 @@
 ---
-title: "Recruitment"
+title: "Consort"
 author: 
-date: "Last Updated: 9/25/2020"
+date: "Last Updated: 10/05/2020"
 output: 
   html_document:
     theme: flatly
     toc: TRUE
-    toc_float: TRUE
 ---
 ```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
 
@@ -25,12 +24,14 @@ library(lubridate)
 library(plyr)
 library(RColorBrewer)
 library(DiagrammeR)
+library(DiagrammeRsvg)
+library(rsvg)
 options(knitr.table.format = "html", knitr.kable.NA = '') 
 ```
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/Raw_Data/DKLog_rSEAL_12OCT2020.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/RSEALDKLOG_05OCTDATA.csv')
 
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
@@ -42,32 +43,52 @@ DKParsedData <- select (DKdata, rseal_dkid,rseal_dklog_006:rseal_dk_log_complete
 
 
 ```{r Consort Diagram, echo = FALSE, message=FALSE}
-#Consort Diagram
+#Consort Diagram Assign Variables
 
 TotalContact <-nrow(DKParsedData)
-Interested <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1')
+Interested <- subset(DKParsedData, DKParsedData$rseal_dk_log_009 == '1')
 Interested <- nrow(Interested)
+NotInterested <- subset(DKParsedData, DKParsedData$rseal_dk_log_009 == '0')
+NotInterested <- nrow(NotInterested)
+Complete <- subset(DKParsedData, DKParsedData$rseal_dk_log_complete == '2')
+Complete <- nrow(Complete)
 Eligible <- subset(DKParsedData, DKParsedData$rseal_dklog_038 == '1')
 Eligible <- nrow(Eligible)
+Recruitment <- DKParsedData$rseal_dklog_006
 
-DiagrammeR::grViz("
-digraph graph2 {
-
-graph [layout = dot]
+grViz("digraph consort {
 
 # node definitions with substituted label text
-node [shape = rectangle, width = 4, fillcolor = Biege]
-a [label = '@@1']
-b [label = '@@2']
-c [label = '@@3']
+node [shape = rectangle, fontname = Helvetica, penwidth = 2.0, fontname = Helvetica]
+A [label = '@@1']
+B [label = '@@2']
+C [label = '@@3']
+D [label = '@@4', href='./Sources.html']
+E [label = 'Recruitment Information', href='./Sources.html']
+F [label = '@@5']
+G [label = '@@6']
+H [label = '@@7']
+I [label = '@@8']
+J [label = '@@9']
+K [label = '@@10']
+L [label = '@@10']
 
-a -> b -> c
-
+A -> B; A->D; B->C; E;C->F; F->G; G->H; C->I; I->J;J->K
 }
 
-[1]: paste0('Total Contacted (n = ', TotalContact, ')')
+#Define Labels
+
+
+[1]: paste0('Total in DK Log (n = ', TotalContact, ')')
 [2]: paste0('Total Interested (n = ', Interested, ')')
 [3]: paste0('Total Eligible (n = ', Eligible, ')')
+[4]: paste0('Not Interested (n = ', NotInterested, ')')
+[5]: 'Wave 1 Complete'
+[6]: 'Wave 2 Complete'
+[7]: 'Wave 3 Complete'
+[8]: 'Wave 1 Not Complete'
+[9]: 'Wave 2 Not Complete'
+[10]: 'Wave 3 Not Complete'
 ")
 
 ```
