@@ -1,12 +1,10 @@
 ---
 title: "Intervention"
 author: 
-date: "Last Updated: 7/17/2020"
+#date: "Last Updated: 10/01/2020"
 output: 
   html_document:
     theme: flatly
-    toc: TRUE
-    toc_float: TRUE
 ---
 ```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
 
@@ -32,10 +30,18 @@ library(tigerstats)
 library(plotrix)
 library(RColorBrewer)
 options(knitr.table.format = "html", knitr.kable.NA = '') 
+
+
 ```
 
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 
-```{r Family Statuses, echo = FALSE, message=FALSE}
-#TBD
+<iframe src ="https://dat-snaplab.shinyapps.io/shinypassword/" style="border: none; width: 1500px; height: 1000px;"/>
+</iframe>
 
-```

@@ -1,20 +1,108 @@
 ---
 title: "Current Enrollment"
 author: 
-date: "Last Updated: 6/20/2020"
+date: "Last Updated: 10/01/2020"
 output: 
   html_document:
     theme: flatly
     toc: TRUE
     toc_float: TRUE
 ---
+```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
 
-```{r setup, include = FALSE, echo= FALSE,cache = FALSE}
-knitr::opts_chunk$set(
-  comment = NA,
-  warning = FALSE,
-  message = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(knitr)
+options(digits=1)
+library(ggpubr)
+library(plotly)
+library(emmeans)
+library(papaja)
+library(ggpubr)
+library(kableExtra)
+library(descr)
+library(dplyr)
+library(magick)
+library(tidyverse)
+library(ggformula)
+library(lubridate)
+library(janitor)
+library(plyr)
+library(tigerstats)
+library(plotrix)
+library(RColorBrewer)
+library(reshape2)
+library(DT)
+options(knitr.table.format = "html", knitr.kable.NA = '') 
 ```
+
+
+
+```{r FamTracker setup, echo = FALSE, message=FALSE}
+#FamTracker Data
+FamTracker <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/01_Data_Management/rSeal Dashboard.csv')
+
+FamTrackerRecruitment <- select (FamTracker, RecruitmentSource, flag)
+
+FamTrackerRecruitment <- filter(FamTrackerRecruitment, flag == 1)
+#print.data.frame(FamTrackerRecruitment)
+FamTrackerRecruitment <- as.data.frame(FamTrackerRecruitment)
+
+lb <- tribble(
+  ~RecruitmentSource, ~lbs,
+  1, "Head Start of Lane County",
+  2, "DHS Mailer",
+  3, "WIC Program",
+  4, "Springfield Public Library",
+  5, "Eugene Public Library",
+  6, "EC Cares",
+  7, "Centro Latino Americano",
+  8, "Facebook",
+  9, "Craigslist",
+  10, "Word of Mouth",
+  11,	"Staff Member",
+  12,	"Other"
+)
+
+
+RS <- FamTrackerRecruitment %>% 
+      group_by(RecruitmentSource) %>% tally()
+
+RS <- left_join(RS,lb)
+
+#print.data.frame(RS)
+
+RSlabel <- round(RS$n/sum(RS$n)*100)
+    lbls <- paste(RS$lbs, RSlabel, "%")
+    pie(RS$n, labels = lbls, main = "Recruitment Source")
+
+FamTrackerDt <- select (FamTracker, RSID, Completed, Dt)
+
+#print.data.frame(FamTrackerDt)
+
+FamTrackerTrans <- dcast(FamTrackerDt, Completed ~ RSID, value.var = 'Dt')
+
+#print.data.frame(FamTrackerTrans)
+
+FamTrackerTrans <- t(FamTrackerTrans)
+FamTrackerTrans <- as.data.frame(FamTrackerTrans)
+FamTrackerTrans <- FamTrackerTrans[-1,]
+names(FamTrackerTrans)<-c("IntroCall","Survey1", "Survey2", "PDR2", "PDR3", "LENA1", "LENA2","Notes")
+
+datatable(
+    FamTrackerTrans,
+
+  options = list(lengthMenu=list(c(5,15,20),c('5','15','20')),pageLength=50,scrollX=TRUE,scrollCollapse=TRUE,columnDefs=list(list(className='dt-center',targets="_all"))
+  ),
+  filter = "top",
+  selection = 'multiple',
+  style = 'bootstrap',
+  class = 'cell-border stripe'
+  ) 
+
+```
+
+
 
 In this section there will be:
   
