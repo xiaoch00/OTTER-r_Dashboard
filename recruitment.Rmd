@@ -1,7 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-date: "Last Updated: 10/06/2020"
+date: "Last Updated: 10/15/2020"
 output: 
   html_document:
     theme: flatly
@@ -36,6 +36,7 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 
 ```{r Family Statuses, echo = FALSE, message=FALSE}
 #DK Data
+<<<<<<< HEAD
 FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pilot/FamTracker.xlsx")
 IntroDate <- as.Date(FamData$`Intro Call Date`, format = "%m/%d/%Y")
 FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
@@ -44,12 +45,31 @@ LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
 SurvComp <- as.data.frame(table(FinishSurveys))
 LENARec <- as.data.frame(table(LENARec))
 LENARet <- as.data.frame(table(LENARet))
+=======
+
+#FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pilot/Project Management/FamTracker.xlsx")
+
+#IntroDate <- as.Date(FamData$`Intro Call Date`, format = "%m/%d/%Y")
+#FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
+#LENARec <- as.Date(FamData$`LENAs recieved`, format = "%m/%d/%Y")
+#LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
+
+
+
+#SurvComp <- as.data.frame(table(FinishSurveys))
+#LENARec <- as.data.frame(table(LENARec))
+#LENARet <- as.data.frame(table(LENARet))
+>>>>>>> 2f53c8340743aa9208eda49439876012d235f70b
 ```
 
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
 DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/Raw_Data/DKLog_rSEAL_12OCT2020.csv')
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2f53c8340743aa9208eda49439876012d235f70b
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
 Atempt3Date <- as.Date(DKdata$rseal_dklog_032, format = "%m/%d/%Y")
@@ -119,6 +139,7 @@ DHSSchedSuccess <-100*DHSScheduledCount/DHSContacted
 
 ```{r Attempt Status, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
 #Counts of Statuses
+<<<<<<< HEAD
 #Introcall <- table(FamData$`Finished Intro Call`)
 #StatusPlot <- barplot(Introcall, beside = TRUE, main = "Intro Call Statuses",
         #col = brewer.pal(4,"Set2"), 
@@ -150,6 +171,11 @@ DHSSchedSuccess <-100*DHSScheduledCount/DHSContacted
         #ylab = "Count", legend = c("Contact family", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
          #args.legend = list(x="topright", cex=.7),ylim=c(0,20), xaxt = "n")
 #barlabels(Attempt3Plot, Attempt3)
+=======
+
+
+
+>>>>>>> 2f53c8340743aa9208eda49439876012d235f70b
 ```   
 
 
