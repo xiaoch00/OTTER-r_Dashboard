@@ -9,7 +9,6 @@ output:
     toc_float: TRUE
 ---
 ```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
-
 knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
 library(knitr)
@@ -41,13 +40,10 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 ```{r FamTracker setup, echo = FALSE, message=FALSE}
 #FamTracker Data
 FamTracker <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/01_Data_Management/rSeal Dashboard.csv')
-
 FamTrackerRecruitment <- select (FamTracker, RecruitmentSource, flag)
-
 FamTrackerRecruitment <- filter(FamTrackerRecruitment, flag == 1)
 #print.data.frame(FamTrackerRecruitment)
 FamTrackerRecruitment <- as.data.frame(FamTrackerRecruitment)
-
 lb <- tribble(
   ~RecruitmentSource, ~lbs,
   1, "Head Start of Lane County",
@@ -63,43 +59,48 @@ lb <- tribble(
   11,	"Staff Member",
   12,	"Other"
 )
-
-
 RS <- FamTrackerRecruitment %>% 
       group_by(RecruitmentSource) %>% tally()
-
 RS <- left_join(RS,lb)
-
 #print.data.frame(RS)
-
 RSlabel <- round(RS$n/sum(RS$n)*100)
     lbls <- paste(RS$lbs, RSlabel, "%")
     pie(RS$n, labels = lbls, main = "Recruitment Source")
-
 FamTrackerDt <- select (FamTracker, RSID, Completed, Dt)
-
 #print.data.frame(FamTrackerDt)
-
 FamTrackerTrans <- dcast(FamTrackerDt, Completed ~ RSID, value.var = 'Dt')
-
 #print.data.frame(FamTrackerTrans)
-
 FamTrackerTrans <- t(FamTrackerTrans)
 FamTrackerTrans <- as.data.frame(FamTrackerTrans)
 FamTrackerTrans <- FamTrackerTrans[-1,]
+<<<<<<< HEAD
 names(FamTrackerTrans)<-c("IntroCall","Survey1", "Survey2", "PDR2", "PDR3", "LENA1", "LENA2","Notes")
 
 datatable(
     FamTrackerTrans,
 
   options = list(lengthMenu=list(c(5,15,20),c('5','15','20')),pageLength=50,scrollX=TRUE,scrollCollapse=TRUE,columnDefs=list(list(className='dt-center',targets="_all"))
+=======
+names(FamTrackerTrans)<-c("IntroCall","Survey1", "Survey2", "PDR2", "PDR3", "LENA1", "LENA2")
+datatable(
+    FamTrackerTrans,
+  options = list(lengthMenu=list(c(5,15,20),c('5','15','20')),pageLength=50,scrollX=TRUE,scrollCollapse=TRUE,
+                 initComplete = JS(
+                   "function(settings, json) {",
+                   "$(this.api().table().header()).css({'background-color': '#F0F8FF', 'color': '1c1b1b'});",
+                   "}"),
+                 columnDefs=list(list(className='dt-center',targets="_all"))
+>>>>>>> xiaoch00-master
   ),
   filter = "top",
   selection = 'multiple',
   style = 'bootstrap',
   class = 'cell-border stripe'
   ) 
+<<<<<<< HEAD
 
+=======
+>>>>>>> xiaoch00-master
 ```
 
 
@@ -111,4 +112,3 @@ In this section there will be:
   - Number of subjects across time (monthly trend)
   
   - Number of subjects at each phase in the study (Pre, Intervention, Post and Follow-Up)
-

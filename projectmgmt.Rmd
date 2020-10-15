@@ -10,10 +10,7 @@ output:
 ---
 
 ```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
-
 knitr::include_app('https://dat-snaplab.shinyapps.io/shinypassword/', height = '600px')
-
-
 ```
 
 
@@ -31,4 +28,3 @@ This section will have the following:
   
   
   - Consort Diagram
-
