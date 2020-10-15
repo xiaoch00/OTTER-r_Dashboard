@@ -6,14 +6,19 @@ navbar:
       href: index.html
     - text: "Snapshot"
       menu:
-      - text: "Recruitment"
-        href: recruitment.html
-      - text: "Intervention"
-        href: intervention.html
-      - text: "Current Enrollment"
-        href: enrollment.html
+      - text: "Consort"
+        href: consort.html
       - text: "Demographics"
         href: demographics.html
+<<<<<<< HEAD
+      - text: "Sources"
+        href: Sources.html
+      - text: "Intervention"
+        href: intervention.html
+=======
+      - text: "Recruitment"
+        href: recruitment.html
+>>>>>>> xiaoch00-master
       - text: "Project Management"
         href: projectmgmt.html
     - text: "Measures Summaries"

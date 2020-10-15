@@ -1,7 +1,7 @@
 ---
 title: "rSEAL Dashboard"
-author: "Built by: Allison Kunerth"
-date: "Last Updated: 6/21/2020"
+author: "Built by: Allison Kunerth and Xiao Cheng"
+date: "Last Updated: 10/04/2020"
 output: 
   html_document:
     theme: flatly

@@ -1,0 +1,147 @@
+---
+title: "Sources"
+author: 
+date: "Last Updated: 10/05/2020"
+header-includes:
+  - \usepackage{floatrow}
+output: 
+  html_document:
+    theme: flatly
+    keep_tex: true
+---
+```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
+
+library(readxl)
+library(knitr)
+library(ggpubr)
+library(frequency)
+library(plotly)
+library(emmeans)
+library(kableExtra)
+library(papaja)
+library(kableExtra)
+library(dplyr)
+library(tidyverse)
+library(ggformula)
+library(lubridate)
+library(plyr)
+library(RColorBrewer)
+library(DiagrammeR)
+library(DiagrammeRsvg)
+library(rsvg)
+library(reshape2)
+knitr::opts_chunk$set(echo = TRUE)
+options(knitr.table.format = "html", knitr.kable.NA = '') 
+```
+
+```{r DK Log variable setup, echo = FALSE, message=FALSE}
+#DK Data
+<<<<<<< HEAD
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/Raw_Data/DKLog_rSEAL_12OCT2020.csv')
+=======
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/RSEALDKLOG_05OCTDATA.csv')
+>>>>>>> xiaoch00-master
+
+DKParsedData <- select (DKdata, rseal_dkid,rseal_dklog_006:rseal_dk_log_complete )
+
+```
+
+```{r Reasons,  echo = FALSE, message=FALSE, fig.align = "right", fig.width=5, fig.height=3}
+
+#Reasons
+TimeCommit <- subset(DKParsedData, DKParsedData$rseal_dklog_010___1 == '1')
+TimeCommit <- nrow(TimeCommit)
+Stressed <- subset(DKParsedData, DKParsedData$rseal_dklog_010___2 == '1')
+Stressed <- nrow(Stressed)
+NotFit <- subset(DKParsedData, DKParsedData$rseal_dklog_010___3 == '1')
+NotFit <- nrow(NotFit)
+Privacy <- subset(DKParsedData, DKParsedData$rseal_dklog_010___4 == '1')
+Privacy <- nrow(Privacy)
+Comfort <- subset(DKParsedData, DKParsedData$rseal_dklog_010___5 == '1')
+Comfort <- nrow(Comfort)
+Cultural <- subset(DKParsedData, DKParsedData$rseal_dklog_010___6 == '1')
+Cultural <- nrow(Cultural)
+Understand <- subset(DKParsedData, DKParsedData$rseal_dklog_010___7 == '1')
+Understand <- nrow(Understand)
+Staff <- subset(DKParsedData, DKParsedData$rseal_dklog_010___8 == '1')
+Staff <- nrow(Staff)
+Other <- subset(DKParsedData, DKParsedData$rseal_dklog_010___9 == '1')
+Other <- nrow(Other)
+Unknown <- subset(DKParsedData, DKParsedData$rseal_dklog_010___0 == '1')
+Unknown <- nrow(Unknown)
+
+#Define Labels
+RZTime <- paste0('Time Commitment (n = ', TimeCommit, ')')
+RZStressed <- paste0('Stressed (n = ', Stressed, ')')
+RZNotFit <- paste0('Not a Fit (n = ', NotFit, ')')
+RZPrivacy <- paste0('Privacy (n = ', Privacy, ')')
+RZComfort <- paste0('Not Comfortable (n = ', Comfort, ')')
+RZCultural <- paste0('Cultural or Language (n = ', Cultural, ')')
+RZUnderstand <- paste0('Do not understand (n = ', Understand, ')')
+RZStaff <- paste0('Do not know staff (n = ', Staff, ')')
+RZOther <- paste0('Other (n = ', Other, ')')
+RZUnknown <- paste0('Unknown (n = ', Unknown, ')')
+Reasons1 = paste(RZTime,RZStressed,RZNotFit,RZPrivacy,RZComfort,RZCultural,RZUnderstand,RZStaff,RZOther,RZUnknown, sep="\n")
+
+grViz("digraph dot{
+
+graph [layout = dot, rankdir = LR]
+
+# node definitions with substituted label text
+node [shape = rectangle, fontname = Helvetica, fixedsize = false, overlap= false, fontname = Helvetica, fontsize = 30]
+A [label = '@@1']
+B [label = '@@2']
+C [label = '@@3']
+D [label = '@@4']
+E [label = '@@5']
+F [label = '@@6']
+G [label = '@@7']
+H [label = '@@8']
+I [label = '@@9']
+J [label = '@@10']
+K [label = '@@11']
+
+#edge statements
+A->B; A->C; A->D; A->E; A->F; A->G;
+A->H; A->I; A->J; A->K
+}
+
+#Define Labels
+[1]: 'Reasons why Not Interested'
+[2]: RZTime
+[3]: RZStressed
+[4]: RZNotFit
+[5]: RZPrivacy
+[6]: RZComfort
+[7]: RZCultural
+[8]: RZUnderstand
+[9]: RZStaff
+[10]: RZOther
+[11]: RZUnknown
+")
+
+```
+
+```{r Attempt Status,  echo = FALSE, message=FALSE, fig.align = "left", fig.width=4, fig.height=4}
+
+#Pie Chart of Statuses
+mytable <- table(DKParsedData$rseal_dklog_016)
+lbls <- c("Head Start", "DHS", "WIC", "Springfield Library", "Eugene Library", "EC Cares","Centro","Facebook","Craigslist","Word of Mouth", "Staff Member","Other")
+par(mar=c(2,0,2,2))
+pie(mytable, labels = lbls, cex=.6,
+   main="Sources")
+
+```
+
+```{r Source Chart,  echo = FALSE, message=FALSE, fig.align = "right", fig.width=10, fig.height=10}
+
+Source1 = table(DKParsedData$rseal_dklog_016)
+
+Source1 = as.data.frame(Source1)
+names(Source1)[1]=''
+rownames(Source1) <- c('DHS', 'WIC', 'Springfield Library', 'Eugene Library', 'EC Cares', 'Centro')
+
+Source1 %>%
+  kbl(caption = "Sources Frequencies", fontsize = 12) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+```
