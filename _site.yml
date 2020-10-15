@@ -10,6 +10,10 @@ navbar:
         href: consort.html
       - text: "Demographics"
         href: demographics.html
+      - text: "Sources"
+        href: Sources.html
+      - text: "Intervention"
+        href: intervention.html
       - text: "Project Management"
         href: projectmgmt.html
     - text: "Measures Summaries"
