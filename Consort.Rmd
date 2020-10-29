@@ -64,10 +64,17 @@ Wave3NoComp <- length(which(SubInfo$rseal_subj_008==4))
 Wave3Comp <- length(which(SubInfo$rseal_subj_027___3==1))
 IntervComp <- sum(SubInfo$rseal_subj_032 != "")
 
-grViz("digraph consort {
+grViz("digraph dot {
 
 # node definitions with substituted label text
 node [shape = rectangle, fontname = Helvetica, penwidth = 2.0, fontname = Helvetica, attr_theme = Null]
+
+node [fillcolor = red]
+A B C D F G H
+
+node [fillcolor = green]
+E I J K L M N O P Q R S T
+
 A [label = '@@1']
 B [label = '@@2']
 C [label = '@@3']
