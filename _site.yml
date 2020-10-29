@@ -14,6 +14,8 @@ navbar:
         href: recruitment.html
       - text: "Project Management"
         href: projectmgmt.html
+      - text: "Intervention"
+        href: intervention.html
     - text: "Measures Summaries"
       menu:
       - text: "TBD"
