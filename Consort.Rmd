@@ -1,7 +1,7 @@
 ---
 title: "Consort"
 author: 
-date: "Last Updated: 10/05/2020"
+date: "Last Updated: 10/28/2020"
 output: 
   html_document:
     theme: flatly
@@ -32,11 +32,7 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
 
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/Raw_Data/DKLog_rSEAL_23OCT2020.csv')
-
-Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
-Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
-Atempt3Date <- as.Date(DKdata$rseal_dklog_032, format = "%m/%d/%Y")
+DKdata <- data.frame(read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/Raw_Data/DKLog_rSEAL_23OCT2020.csv'))
 
 DKParsedData <- select (DKdata, rseal_dkid,rseal_dklog_006:rseal_dk_log_complete )
 
@@ -47,14 +43,17 @@ DKParsedData <- select (DKdata, rseal_dkid,rseal_dklog_006:rseal_dk_log_complete
 #Consort Diagram Assign Variables
 
 TotalContact <-nrow(DKParsedData)
-Interested <- subset(DKParsedData, DKParsedData$rseal_dk_log_009 == '1')
-Interested <- nrow(Interested)
+Interested <- nrow(subset(DKParsedData, DKParsedData$rseal_dk_log_009 == '1'))
 NotInterested <- subset(DKParsedData, DKParsedData$rseal_dk_log_009 == '0')
 NotInterested <- nrow(NotInterested)
 Complete <- subset(DKParsedData, DKParsedData$rseal_dk_log_complete == '2')
 Complete <- nrow(Complete)
-Eligible <- subset(DKParsedData, DKParsedData$rseal_dklog_038 == '1')
+Eligible <- subset(DKParsedData, DKParsedData$rseal_dklog_038 == '2')
 Eligible <- nrow(Eligible)
+NoEligible <- subset(DKParsedData, DKParsedData$rseal_dklog_038 == '0')
+NoEligible <- nrow(NoEligible)
+Unver <- subset(DKParsedData, DKParsedData$rseal_dklog_038 == '2')
+Unver <- nrow(Unver)
 Recruitment <- DKParsedData$rseal_dklog_006
 
 grViz("digraph consort {
@@ -65,16 +64,20 @@ A [label = '@@1']
 B [label = '@@2']
 C [label = '@@3']
 D [label = '@@4', href='./Sources.html']
-E [label = 'Recruitment Information', href='./Sources.html']
 F [label = '@@5']
 G [label = '@@6']
 H [label = '@@7']
 I [label = '@@8']
 J [label = '@@9']
 K [label = '@@10']
-L [label = '@@10']
-
-A -> B; A->D; B->C; E;C->F; F->G; G->H; C->I; I->J;J->K
+L [label = '@@11']
+M [label = '@@12']
+N [label = '@@13']
+O [label = '@@14']
+P [label = '@@15']
+Q [label = '@@16']
+R [label = '@@17']
+A -> B; A->D; B->C;B->F; B->G; C->H; H->I; H->J;I->K; I->L; K->M; K->N; M->O; M->P; O->Q; O->R
 }
 
 #Define Labels
@@ -84,12 +87,19 @@ A -> B; A->D; B->C; E;C->F; F->G; G->H; C->I; I->J;J->K
 [2]: paste0('Total Interested (n = ', Interested, ')')
 [3]: paste0('Total Eligible (n = ', Eligible, ')')
 [4]: paste0('Not Interested (n = ', NotInterested, ')')
-[5]: 'Wave 1 Complete'
-[6]: 'Wave 2 Complete'
-[7]: 'Wave 3 Complete'
-[8]: 'Wave 1 Not Complete'
-[9]: 'Wave 2 Not Complete'
-[10]: 'Wave 3 Not Complete'
+[5]: paste0('Total Not Eligible (n = ', NoEligible, ')')
+[6]: paste0('Total Unverified (n = ', Unver, ')')
+[7]: paste0('Intro Call Scheduled (n = ', Unver, ')')
+[8]: paste0('Intro Call Complete (n = ', Unver, ')')
+[9]: paste0('Not Enrolled (n = ', Unver, ')')
+[10]:paste0('Wave 1 Assessment Complete (n = ', Unver, ')')
+[11]:paste0('Wave 1 Assessment Dropout (n = ', Unver, ')')
+[12]:paste0('Intervention Complete (n = ', Unver, ')')
+[13]:paste0('Intervention Dropout (n = ', Unver, ')')
+[14]:paste0('Wave 2 Complete (n = ', Unver, ')')
+[15]:paste0('Wave 2 Dropout (n = ', Unver, ')')
+[16]:paste0('Wave 3 Complete (n = ', Unver, ')')
+[17]:paste0('Wave 3 Dropout (n = ', Unver, ')')
 ")
 
 ```
