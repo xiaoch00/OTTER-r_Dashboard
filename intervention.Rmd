@@ -1,11 +1,7 @@
 ---
 title: "Intervention"
 author: 
-<<<<<<< HEAD
-#date: "Last Updated: 10/15/2020"
-=======
-#date: "Last Updated: 10/01/2020"
->>>>>>> xiaoch00-master
+date: "Last Updated: 10/15/2020"
 output: 
   html_document:
     theme: flatly

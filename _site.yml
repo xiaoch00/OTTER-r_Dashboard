@@ -2,59 +2,22 @@ name: "rSEAL Dashboard"
 navbar:
   title: "rSEAL Dashboard"
   left:
-    - text: "Home"
-      href: index.html
     - text: "Snapshot"
       menu:
       - text: "Consort"
         href: consort.html
-      - text: "Demographics"
-        href: demographics.html
-<<<<<<< HEAD
       - text: "Sources"
         href: Sources.html
-      - text: "Intervention"
-        href: intervention.html
-=======
       - text: "Recruitment"
         href: recruitment.html
->>>>>>> xiaoch00-master
       - text: "Project Management"
         href: projectmgmt.html
+      - text: "Intervention"
+        href: intervention.html
     - text: "Measures Summaries"
       menu:
-      - text: "PSI"
+      - text: "TBD"
         href: tbd.html
-      - text: "PSOC"
-        href: tbd.html
-      - text: "ACES"
-        href: tbd.html
-      - text: "BCES"
-        href: tbd.html
-      - text: "BITSEA"
-        href: tbd.html  
-      - text: "CBCL"
-        href: tbd.html     
-      - text: "ECBQ"
-        href: tbd.html  
-      - text: "PSWQ"
-        href: tbd.html          
-      - text: "CESD"
-        href: tbd.html  
-      - text: "PDR"
-        href: tbd.html 
-      - text: "FRQ"
-        href: tbd.html  
-      - text: "IEMP"
-        href: tbd.html 
-      - text: "PIP"
-        href: tbd.html  
-      - text: "MFAS"
-        href: tbd.html  
-      - text: "DMI"
-        href: tbd.html
-      - text: "Responsive Caregiving"
-        href: tbd.html 
     - text: "Initial Findings"
       menu:
       - text: "Pre-Intervention"

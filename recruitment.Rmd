@@ -1,11 +1,7 @@
 ---
 title: "Recruitment"
 author: 
-<<<<<<< HEAD
-date: "Last Updated: 10/15/2020"
-=======
-date: "Last Updated: 10/05/2020"
->>>>>>> xiaoch00-master
+date: "Last Updated: 10/29/2020"
 output: 
   html_document:
     theme: flatly
@@ -38,47 +34,11 @@ library(reshape2)
 options(knitr.table.format = "html", knitr.kable.NA = '') 
 ```
 
-```{r Family Statuses, echo = FALSE, message=FALSE}
-#DK Data
-<<<<<<< HEAD
-<<<<<<< HEAD
-FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pilot/FamTracker.xlsx")
-IntroDate <- as.Date(FamData$`Intro Call Date`, format = "%m/%d/%Y")
-FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
-LENARec <- as.Date(FamData$`LENAs recieved`, format = "%m/%d/%Y")
-LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
-SurvComp <- as.data.frame(table(FinishSurveys))
-LENARec <- as.data.frame(table(LENARec))
-LENARet <- as.data.frame(table(LENARet))
-=======
-
-#FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pilot/Project Management/FamTracker.xlsx")
-
-=======
-FamData <- read_excel("~/Dropbox (University of Oregon)/SEAL R01/_Remote SEAL Pilot/Project Management/FamTracker.xlsx")
->>>>>>> xiaoch00-master
-#IntroDate <- as.Date(FamData$`Intro Call Date`, format = "%m/%d/%Y")
-#FinishSurveys <- as.Date(FamData$`Finished Surveys`, format = "%m/%d/%Y")
-#LENARec <- as.Date(FamData$`LENAs recieved`, format = "%m/%d/%Y")
-#LENARet <- as.Date(FamData$`LENAs Returned`, format = "%m/%d/%Y")
-#SurvComp <- as.data.frame(table(FinishSurveys))
-#LENARec <- as.data.frame(table(LENARec))
-#LENARet <- as.data.frame(table(LENARet))
->>>>>>> 2f53c8340743aa9208eda49439876012d235f70b
-```
-
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-<<<<<<< HEAD
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/Raw_Data/DKLog_rSEAL_12OCT2020.csv')
-<<<<<<< HEAD
-=======
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/Raw_Data/DKLog_rSEAL_29OCT2020.csv')
 
->>>>>>> 2f53c8340743aa9208eda49439876012d235f70b
-=======
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/RSEALDKLog_05OCTDATA.csv')
->>>>>>> xiaoch00-master
 Atempt1Date <- as.Date(DKdata$rseal_dklog_026, format = "%m/%d/%Y")
 Atempt2Date <- as.Date(DKdata$rseal_dklog_029, format = "%m/%d/%Y")
 Atempt3Date <- as.Date(DKdata$rseal_dklog_032, format = "%m/%d/%Y")
@@ -92,14 +52,14 @@ Ntotal <- nrow(DKParsedData)
 Scheduled <-subset(DKParsedData,DKParsedData$rseal_dklog_025 == '4' | DKParsedData$rseal_dklog_028 == '4'| DKParsedData$rseal_dklog_031 == '4' )
 ScheduledCount <- nrow(Scheduled)
 #Number in DK Log compared to how many contacted so far
-#Contacted <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1' | DKParsedData$rseal_dklog_009 == '0')
-#ToContact <- sum(nrow(DKParsedData) - nrow(Contacted))
+Contacted <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1' | DKParsedData$rseal_dklog_009 == '0')
+ToContact <- sum(nrow(DKParsedData) - nrow(Contacted))
 #Relative success rate (Number interested)
 Interested <- subset(DKParsedData, DKParsedData$rseal_dklog_009 == '1')
 Interested <- nrow(Interested)
 ToSched <- Interested - ScheduledCount
 NumInterested <-nrow(Interested)
-#DKParsedData$eligibility <- ifelse(DKParsedData$rseal_dklog_012 == '1' & DKParsedData$rseal_dklog_013 == '1' & #DKParsedData$rseal_dklog_014 == '1' & DKParsedData$rseal_dklog_015 == '1' & (DKParsedData$rseal_dklog_018 == #'1'|DKParsedData$rseal_dklog_019___1 == '1'|DKParsedData$rseal_dklog_019___2 == '1'|DKParsedData$rseal_dklog_019___3 == #'1'|DKParsedData$rseal_dklog_019___4 == '1')& DKParsedData$rseal_dklog_020 == '1' & DKParsedData$rseal_dklog_021 == '1', #TRUE,FALSE)
+DKParsedData$eligibility <- ifelse(DKParsedData$rseal_dklog_012 == '1' & DKParsedData$rseal_dklog_013 == '1' & DKParsedData$rseal_dklog_014 == '1' & DKParsedData$rseal_dklog_015 == '1' & (DKParsedData$rseal_dklog_018 == '1'|DKParsedData$rseal_dklog_019___1 == '1'|DKParsedData$rseal_dklog_019___2 == '1'|DKParsedData$rseal_dklog_019___3 == '1'|DKParsedData$rseal_dklog_019___4 == '1') & DKParsedData$rseal_dklog_020 == '1' & DKParsedData$rseal_dklog_021 == '1', TRUE,FALSE)
 Eligible <- subset(DKParsedData, DKParsedData$rseal_dklog_038 == '1')
 Eligible <- nrow(Eligible)
 AttemptContact <-subset(DKParsedData,
@@ -110,6 +70,7 @@ PercentInterested <- 100*sum(Interested, na.rm=T)/AttemptContact2
 SchedSuccess <-100*sum(ScheduledCount)/AttemptContact2
 TotalDK <- nrow(DKParsedData)
 ToCall <- TotalDK-AttemptContact2
+
 #DHS PercentInterested and scheduling success rate
 DHSsubset <- subset(DKParsedData, DKParsedData$rseal_dklog_006 == '2')
 DHSCount <- nrow(DHSsubset)
@@ -134,102 +95,6 @@ DHSSchedSuccess <-100*DHSScheduledCount/DHSContacted
 <font size = "4"> Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(PercentInterested)`\%**</font> were interested, and there are currently <font size="4" color="red"> **`r ToContact`**</font> participants whose interest in participating has not been determined yet.</font> 
 
 <font size = "4"> So far, there are <font size="4" color="red"> **`r papaja::printnum(DHSCount)`**</font> potential participants from DHS Mailer, <font size="4" color="red"> **`r papaja::printnum(DHSContacted)`**</font> of whom have been contacted. Of those who were contacted, <font size="4" color="red"> **`r papaja::printnum(DHSInterested)` (`r papaja::printnum(DHSPercentInterested)`\%)**</font> participants showed interest and <font size="4" color="red"> **`r papaja::printnum(DHSScheduledCount)` (`r papaja::printnum(DHSSchedSuccess)`\%)**</font> participants got scheduled successfully.</font>
-
-``` {r Form Counts, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
-<<<<<<< HEAD
-#Form2 <- table(DKParsedData$rseal_dk_log_complete)
-#FormPlot <- barplot(Form2, beside = TRUE, main = "Form Statuses",
-        #col = brewer.pal(3,"Set2"), 
-        #xlab = " ",
-        #ylab = "Count", legend = c("Ineligible or Not Interested", "Still Calling","Scheduled"),
-        #args.legend = list(x="topright", cex=.7),ylim=c(0,110), xaxt = "n")
-#barlabels(FormPlot, Form2)
-=======
-Form2 <- table(DKParsedData$rseal_dk_log_complete)
-FormPlot <- barplot(Form2, beside = TRUE, main = "Form Statuses",
-        col = brewer.pal(3,"Set2"), 
-        xlab = " ",
-        ylab = "Count", legend = c("Ineligible or Not Interested", "Still Calling","Scheduled"),
-        args.legend = list(x="topright", cex=.7),ylim=c(0,110), xaxt = "n")
-barlabels(FormPlot, Form2)
->>>>>>> xiaoch00-master
-```  
-
-
-```{r Attempt Status, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
-#Counts of Statuses
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Introcall <- table(FamData$`Finished Intro Call`)
-#StatusPlot <- barplot(Introcall, beside = TRUE, main = "Intro Call Statuses",
-        #col = brewer.pal(4,"Set2"), 
-        #xlab = " ",
-        #ylab = "Count", legend = c("Complete", "Dropout", "Scheduled", "Potential Dropout"),
-        #args.legend = list(x="topright", cex=.7),ylim=c(0,50), xaxt = "n")
-#barlabels(StatusPlot, Introcall)
-#Attempt Statuses
-#Attempt1 <- table(DKParsedData$rseal_dklog_025)
-#Attempt1Plot <- barplot(Attempt1, beside = TRUE, main = "Attempt 1 Statuses",
-        #col = brewer.pal(6,"Set2"), 
-        #xlab = " ",
-        #ylab = "Count", legend = c("Contact family","Requested Call Back", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-        #args.legend = list(x="topright", cex=.7),ylim=c(0,120), xaxt = "n")
-#barlabels(Attempt1Plot, Attempt1)
-#Attempt2 <- table(DKParsedData$rseal_dklog_028)
-#Attempt2Plot <- barplot(Attempt2,
-        #col = brewer.pal(6,"Set2"), 
-        #main = "Attempt 2 Statuses",
-        #xlab = " ",
-        #ylab = "Count", legend = c("Contact family","Requested Call Back", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-        #args.legend = list(x="topright", cex=.7), ylim=c(0,100),
-        #xaxt = "n")
-#barlabels(Attempt2Plot, Attempt2)
-#Attempt3 <- table(DKParsedData$rseal_dklog_031)
-#Attempt3Plot <- barplot(Attempt3, beside = TRUE, main = "Attempt 3 Statuses",
-        #col = brewer.pal(5,"Set2"), 
-         #xlab = " ",
-        #ylab = "Count", legend = c("Contact family", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-         #args.legend = list(x="topright", cex=.7),ylim=c(0,20), xaxt = "n")
-#barlabels(Attempt3Plot, Attempt3)
-=======
-
-
-
->>>>>>> 2f53c8340743aa9208eda49439876012d235f70b
-=======
-Introcall <- table(FamData$`Finished Intro Call`)
-StatusPlot <- barplot(Introcall, beside = TRUE, main = "Intro Call Statuses",
-        col = brewer.pal(4,"Set2"), 
-        xlab = " ",
-        ylab = "Count", legend = c("Complete", "Dropout", "Scheduled", "Potential Dropout"),
-        args.legend = list(x="topright", cex=.7),ylim=c(0,50), xaxt = "n")
-barlabels(StatusPlot, Introcall)
-#Attempt Statuses
-Attempt1 <- table(DKParsedData$rseal_dklog_025)
-Attempt1Plot <- barplot(Attempt1, beside = TRUE, main = "Attempt 1 Statuses",
-        col = brewer.pal(6,"Set2"), 
-        xlab = " ",
-        ylab = "Count", legend = c("Contact family","Requested Call Back", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-        args.legend = list(x="topright", cex=.7),ylim=c(0,120), xaxt = "n")
-barlabels(Attempt1Plot, Attempt1)
-Attempt2 <- table(DKParsedData$rseal_dklog_028)
-Attempt2Plot <- barplot(Attempt2,
-        col = brewer.pal(6,"Set2"), 
-        main = "Attempt 2 Statuses",
-        xlab = " ",
-        ylab = "Count", legend = c("Contact family","Requested Call Back", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-        args.legend = list(x="topright", cex=.7), ylim=c(0,100),
-        xaxt = "n")
-barlabels(Attempt2Plot, Attempt2)
-Attempt3 <- table(DKParsedData$rseal_dklog_031)
-Attempt3Plot <- barplot(Attempt3, beside = TRUE, main = "Attempt 3 Statuses",
-        col = brewer.pal(5,"Set2"), 
-         xlab = " ",
-        ylab = "Count", legend = c("Contact family", "Non-responsive/Disconnected", "Scheduled", "Not Interested", "Ineligible"),
-         args.legend = list(x="topright", cex=.7),ylim=c(0,20), xaxt = "n")
-barlabels(Attempt3Plot, Attempt3)
->>>>>>> xiaoch00-master
-```   
 
 
 ```{r Not Interested Setup, fig.width=4, fig.height=4, echo = FALSE, message=FALSE}
