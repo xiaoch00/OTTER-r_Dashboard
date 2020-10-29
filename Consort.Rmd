@@ -1,11 +1,10 @@
 ---
 title: "Consort"
 author: 
-date: "Last Updated: 10/28/2020"
+date: "Last Updated: 10/29/2020"
 output: 
   html_document:
     theme: flatly
-    toc: TRUE
 ---
 ```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
 
@@ -68,7 +67,7 @@ IntervComp <- sum(SubInfo$rseal_subj_032 != "")
 grViz("digraph consort {
 
 # node definitions with substituted label text
-node [shape = rectangle, fontname = Helvetica, penwidth = 2.0, fontname = Helvetica]
+node [shape = rectangle, fontname = Helvetica, penwidth = 2.0, fontname = Helvetica, attr_theme = Null]
 A [label = '@@1']
 B [label = '@@2']
 C [label = '@@3']

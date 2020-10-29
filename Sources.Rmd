@@ -1,7 +1,7 @@
 ---
 title: "Sources"
 author: 
-date: "Last Updated: 10/05/2020"
+date: "Last Updated: 10/29/2020"
 header-includes:
   - \usepackage{floatrow}
 output: 
@@ -36,7 +36,7 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 
 ```{r DK Log variable setup, echo = FALSE, message=FALSE}
 #DK Data
-DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/Raw_Data/DKLog_rSEAL_23OCT2020.csv')
+DKdata <- read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/Raw_Data/DKLog_rSEAL_29OCT2020.csv')
 
 DKParsedData <- select (DKdata, rseal_dkid,rseal_dklog_006:rseal_dk_log_complete )
 

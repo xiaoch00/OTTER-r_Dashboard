@@ -2,8 +2,6 @@ name: "rSEAL Dashboard"
 navbar:
   title: "rSEAL Dashboard"
   left:
-    - text: "Home"
-      href: index.html
     - text: "Snapshot"
       menu:
       - text: "Consort"
