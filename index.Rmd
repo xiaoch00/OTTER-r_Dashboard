@@ -1,7 +1,7 @@
 ---
-title: "rSEAL Dashboard"
+title: "rOTTER Dashboard"
 author: "Built by: Allison Kunerth and Xiao Cheng"
-date: "Last Updated: 10/29/2020"
+date: "Last Updated: 11/12/2020"
 output: 
   html_document:
     theme: flatly
@@ -16,10 +16,10 @@ knitr::opts_chunk$set(
 ```
 
 ```{r, fig.retina=NULL, out.width=100, echo=FALSE}
-knitr::include_graphics("seallogo.jpg")
+knitr::include_graphics("otterlogo.png")
 ```
 
 ## Homepage
 
-This is the homepage for the rSEAL project.
+This is the homepage for the rOTTRE project.
 

@@ -1,7 +1,7 @@
 ---
-title: "Recruitment"
+title: "Consent Tracker"
 author: 
-date: "Last Updated: 10/29/2020"
+date: "Last Updated: 11/13/2020"
 output: 
   html_document:
     theme: flatly
@@ -39,5 +39,5 @@ options(knitr.table.format = "html", knitr.kable.NA = '')
 }
 </style>
 
-<iframe src ="https://dat-snaplab.shinyapps.io/RecruitmentPage/" style="border: none; width: 1500px; height: 1000px;"/>
+<iframe src ="https://dat-snaplab.shinyapps.io/rO_Consent/" style="border: none; width: 1500px; height: 1000px;"/>
 </iframe>

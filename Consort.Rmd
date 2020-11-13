@@ -1,7 +1,7 @@
 ---
 title: "Consort"
 author: 
-date: "Last Updated: 10/29/2020"
+date: "Last Updated: 11/12/2020"
 output: 
   html_document:
     theme: flatly
@@ -28,92 +28,3 @@ library(rsvg)
 options(knitr.table.format = "html", knitr.kable.NA = '') 
 ```
 
-```{r DK Log variable setup, echo = FALSE, message=FALSE}
-#DK Data
-
-DKdata <- data.frame(read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/DK_Log/Raw_Data/DKLog_rSEAL_29OCT2020.csv'))
-
-SubInfo <- data.frame(read.csv(file = '/Volumes/psy-ctn/psy-ctn/SNAPLab/SNAP Projects/SEAL/00_rSEAL/02_rSEAL_Data/PreStudy/Subject_Database/Raw_Data/RSEALSubjectDatabase_DATA_29OCT2020.csv'))
-
-
-DKParsedData <- select (DKdata, rseal_dkid,rseal_dklog_006:rseal_dk_log_complete )
-
-```
-
-
-```{r Consort Diagram, echo = FALSE, message=FALSE}
-#Consort Diagram Assign Variables
-
-TotalContact <-nrow(DKParsedData)
-Interested <- length(which(DKParsedData$rseal_dklog_009==1))
-NotInterested <- length(which(DKParsedData$rseal_dklog_009==0))
-NotDetermined <- sum(is.na(DKParsedData$rseal_dklog_009))
-Eligible <- length(which(DKParsedData$rseal_dk_log_complete==2))
-NoEligible <- length(which(DKParsedData$rseal_dk_log_complete==0))
-Unver <- length(which(DKParsedData$rseal_dk_log_complete==1))
-IntroSched <-nrow(SubInfo)
-IntroComp <- length(which(SubInfo$rseal_subj_001==1))
-IntroNoComp <- length(which(SubInfo$rseal_subj_001==0))
-IntroNoVerComp <- sum(is.na(SubInfo$rseal_subj_001))
-Wave1NoComp <- length(which(SubInfo$rseal_subj_008==2))
-Wave1Comp <- length(which(SubInfo$rseal_subj_027___1==1))
-Wave2NoComp <- length(which(SubInfo$rseal_subj_008==3))
-Wave2Comp <- length(which(SubInfo$rseal_subj_027___2==1))
-IntervNoComp <- length(which(SubInfo$rseal_subj_008==3))
-Wave3NoComp <- length(which(SubInfo$rseal_subj_008==4))
-Wave3Comp <- length(which(SubInfo$rseal_subj_027___3==1))
-IntervComp <- sum(SubInfo$rseal_subj_032 != "")
-
-grViz("digraph consort {
-
-# node definitions with substituted label text
-node [shape = rectangle, fontname = Helvetica, penwidth = 2.0, fontname = Helvetica, attr_theme = Null]
-
-A [label = '@@1']
-B [label = '@@2']
-C [label = '@@3']
-D [label = '@@4', href='./Sources.html']
-F [label = '@@5']
-G [label = '@@6']
-H [label = '@@7']
-I [label = '@@8']
-J [label = '@@9']
-K [label = '@@10']
-L [label = '@@11']
-M [label = '@@12']
-N [label = '@@13']
-O [label = '@@14']
-P [label = '@@15']
-Q [label = '@@16']
-R [label = '@@17']
-S [label = '@@18']
-T [label = '@@19']
-
-A -> B; A->D; B->C;B->F; B->G; C->H; H->I; H->J;I->K; I->L; K->M; K->N; M->O; M->P; O->Q; O->R; A->S; H->T
-}
-
-#Define Labels
-
-
-[1]: paste0('Total in DK Log (n = ', TotalContact, ')')
-[2]: paste0('Total Interested (n = ', Interested, ')')
-[3]: paste0('Total Eligible (n = ', Eligible, ')')
-[4]: paste0('Not Interested (n = ', NotInterested, ')')
-[5]: paste0('Total Not Eligible (n = ', NoEligible, ')')
-[6]: paste0('Total Unverified (n = ', Unver, ')')
-[7]: paste0('Intro Call Scheduled (n = ', IntroSched, ')')
-[8]: paste0('Intro Call Complete (n = ', IntroComp, ')')
-[9]: paste0('Not Enrolled (n = ', IntroNoComp, ')')
-[10]:paste0('Wave 1 Assessment Complete (n = ', Wave1Comp, ')')
-[11]:paste0('Wave 1 Assessment Dropout (n = ', Wave1NoComp, ')')
-[12]:paste0('Intervention Complete (n = ', IntervComp, ')')
-[13]:paste0('Intervention Dropout (n = ', IntervNoComp, ')')
-[14]:paste0('Wave 2 Complete (n = ', Wave2Comp, ')')
-[15]:paste0('Wave 2 Dropout (n = ', Wave2NoComp, ')')
-[16]:paste0('Wave 3 Complete (n = ', Wave3Comp, ')')
-[17]:paste0('Wave 3 Dropout (n = ', Wave3NoComp, ')')
-[18]:paste0('Not Determined (n = ', NotDetermined, ')')
-[19]:paste0('Intro Call Not Verified (n = ', IntroNoVerComp, ')')
-")
-
-```
