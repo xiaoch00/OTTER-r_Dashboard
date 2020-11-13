@@ -1,6 +1,6 @@
-name: "rOTTER Dashboard"
+name: "OTTER-r Dashboard"
 navbar:
-  title: "rOTTER Dashboard"
+  title: "OTTER-r Dashboard"
   left:
     - text: "Snapshot"
       menu:

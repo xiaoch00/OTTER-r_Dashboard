@@ -1,7 +1,7 @@
 ---
-title: "rOTTER Dashboard"
+title: "OTTER-r Dashboard"
 author: "Built by: Allison Kunerth and Xiao Cheng"
-date: "Last Updated: 11/12/2020"
+date: "Last Updated: 11/13/2020"
 output: 
   html_document:
     theme: flatly
