@@ -1,5 +1,5 @@
 ---
-title: "Consent Tracker"
+title: "Consent Tracker" 
 author: 
 date: "Last Updated: 11/13/2020"
 output: 
@@ -8,6 +8,7 @@ output:
     toc: TRUE
     toc_float: TRUE
 ---
+[Open in New Tab](https://dat-snaplab.shinyapps.io/rO_Consent/)
 ```{r load-packages, echo=FALSE, warning=FALSE, include=FALSE, cache=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(readxl)
